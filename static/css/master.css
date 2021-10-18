@@ -1,0 +1,26 @@
+.d {
+	 
+    background-color: rgb(248, 238, 238);
+    animation-name: example;
+    animation-duration: 4s;
+  }
+  
+  @keyframes example {
+    0%   {background-color: rgb(204, 156, 156);}
+    25%  {background-color: rgb(243, 243, 187);}
+    50%  {background-color: rgb(93, 93, 99);}
+    100% {background-color: rgb(180, 223, 180);}
+  }
+  .kl{
+    text-align: center;
+    color: blanchedalmond;
+  }
+  .kll{
+    text-align: center;
+    color: rgb(109, 70, 12);
+  }
+  .ig{
+    height: 500px;
+    width:500px;
+    
+  }

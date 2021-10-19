@@ -1,10 +1,12 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render
 
-class TestPage(TemplateView):
-    template_name = 'test.html'
 
-class ThanksPage(TemplateView):
-    template_name = 'thanks.html'
+from blog.models import blogDb
 
-class homepage(TemplateView):
-    template_name = "index.html"
+def index(request):
+    allBlogs = blogDb.objects.all()
+    context = {'allBlogs':allBlogs}
+    return render(request, 'index.html', context)
+
+

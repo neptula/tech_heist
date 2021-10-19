@@ -1,12 +1,15 @@
 {%extends "base.html" %}
 {%load bootstrap4%}
 {%block content%}
-<div class="container">
-    <h1>Sign Up</h1>
+<div class="container bg-light p-5 my-3"
+    style="max-width:700px; border-right: 2px solid rgb(224 211 211); border-bottom: 2px solid rgb(224 211 211); border-radius:20px">
+    <h3 class="text-center">Sign Up</h3>
     <form method="POST">
-    {%csrf_token%}
-    {%bootstrap_form form%}
-    <input type="Submit" class="btn btn-default" value="Sign Up">
-</form>
+        {%csrf_token%}   
+        {%bootstrap_form form%}
+        
+        <input type="Submit" class="btn btn-default" value="Sign Up">
+    </form>
 </div>
 {%endblock%}
+

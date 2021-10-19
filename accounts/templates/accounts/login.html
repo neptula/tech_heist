@@ -1,12 +1,33 @@
 {% extends "base.html" %}
+ {% block linkcss%}
+
+{% load static%}
+<link rel="stylesheet" href="{%static 'css/login.css'%}">
+{%endblock%} 
+
 {%load bootstrap4%}
 {%block content%}
-<div class="jumbotron" >
-    <h1>Login</h1>
-    <form method="POST">
-    {%csrf_token%}
-    {%bootstrap_form form%}
-    <input type="Submit" class="btn btn-success" value="login">
-</form>
+<div class="mainContainerCSS">
+
+    <div class="box">
+        <div id="cssStyle" style="min-width: 700px;">
+
+            <strong>
+
+                <h3 class="text-center">Login</h3>
+            </strong>
+            <form method="POST">
+                {% csrf_token %}
+                {%bootstrap_form form%}
+
+                <div style="display: flex; flex-direction: column;">
+
+                    <input class="mt-2 py-2" type="Submit" class="btn btn-default" value="login" style="border-radius: 10px;margin-left: 180px;
+            margin-right: 180px; font-size: large; ">
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {%endblock%}
+

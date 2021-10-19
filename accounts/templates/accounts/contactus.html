@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{%load bootstrap4%}
+{%block content%}
+
+<div class="container my-3" style="max-width: 800px;">
+    <form method="POST" action="/accounts/contactus/">
+      {% csrf_token %}
+      
+        <div class="mb-3">
+          <label for="Username" class="form-label">UserName</label>
+          <input type="text" class="form-control" id="Username" name="Username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="phoneNo" class="form-label">Contact No</label>
+          <input type="text" name="phoneNo"class="form-control" id="phoneNo">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="mailid" class="form-control" id="email">
+        </div>
+      
+        <div class="mb-3">
+          <label for="issue" class="form-label">Describe Your Issue:</label>
+          
+          <textarea name="issue" class="form-control" id="issue" cols="30" rows="5"></textarea>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+{%endblock%}

@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 from django.conf import settings
 from django.urls import reverse
@@ -16,7 +16,8 @@ User = get_user_model()
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="posts",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
-    message = models.TextField()
+    header_image =  models.ImageField(null=True, blank=True, upload_to="images/")
+    message = RichTextField(blank=True, null=True)
     message_html = models.TextField(editable=False)
     group = models.ForeignKey(Group, related_name="posts",null=True, blank=True,on_delete=models.CASCADE)
 

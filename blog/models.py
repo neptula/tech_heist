@@ -7,7 +7,7 @@ class blogDb(models.Model):
     author = models.CharField(max_length = 100)
     slug = models.SlugField(unique = True, null = True, blank = True)
     content = models.TextField()
-    timestamp = models.DateTimeField(blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True,blank=True)
     def __str__(self):
         return 'Blog written by ' + self.author
 

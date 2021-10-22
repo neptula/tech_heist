@@ -20,12 +20,13 @@
  
          <ul class="nav navbar-nav navbar-right">
              {% if user.is_authenticated %}
-       <li><a href="#"class="btn btn-simple">Blogs</a></li>
+       
        <li><a href="{%url 'posts:create' %}" class="btn btn-simple">Post</a></li>
        <li><a href="{%url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
        <li><a href="{%url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
-       <a href="{% url 'accounts:contactus'  %}" class="btn btn-simple"><img src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-contact-us-mail-call-icons-blue-contact-us-button-mail-call-icons-blue-118014982.jpg" alt="C" width="50px" height="50px"></a>
-       <li><a class="btn btn-simple" data-toggle="modal" data-target=".bd-example-modal-lg">Profile</a></li>
+       <li><a href="#"class="btn btn-simple"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiwKvxVRjBJHL9YRtzzqqRuQ24Lep_uCfxLbkC0zzHdJGdgeCAXtBv2eyGWpDx1fP8MI&usqp=CAU" alt="B"width="30px" height="40px"></a></li>
+       <a href="{% url 'accounts:contactus'  %}" class="btn btn-simple"><img src="https://www.vhv.rs/dpng/d/424-4243843_contact-us-icon-in-black-ndash-free-icons.png" alt="C" width="50px" height="50px"></a>
+       <li><a class="btn btn-simple" data-toggle="modal" data-target=".bd-example-modal-lg"><img src="https://w7.pngwing.com/pngs/764/495/png-transparent-computer-icons-user-profile-user-miscellaneous-silhouette-account.png" alt="P"width="30px" height="40px"></a></li>
 
        <!-- Modal -->
        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -63,10 +64,10 @@
  
        
              {% else %}
-                   <li><a href="{%url 'groups:all' %}"class="btn btn-simple">Blogs</a></li>
-                   <li><a href="{% url 'accounts:login'  %}" class="btn btn-simple">Log in</a></li>
-                   <li><a href="{% url 'accounts:signup'  %}" class="btn btn-simple">Sign up</a></li>
-          <a href="{% url 'accounts:contactus'  %}" class="btn btn-simple"><img src="https://image.pngaaa.com/553/95553-middle.png" alt="C" width="50px" height="50px"></a>
+                   <li><a href="{%url 'groups:all' %}"class="btn btn-simple"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiwKvxVRjBJHL9YRtzzqqRuQ24Lep_uCfxLbkC0zzHdJGdgeCAXtBv2eyGWpDx1fP8MI&usqp=CAU" alt="B"width="30px" height="40px"> </a></li>
+                   <li><a href="{% url 'accounts:login'  %}" class="btn btn-simple"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs0Cv1_1Ps5IV6069L-FVmfbtraQ4vrH16FrCL1GVCTb9SxPG9HracX6_t8x_mEYZo7dk&usqp=CAU" alt="L" width="30px" height="40px"></a></li>
+                   <li><a href="{% url 'accounts:signup'  %}" class="btn btn-simple"><img src="https://www.clipartmax.com/png/full/474-4742013_sign-up-today-choose-the-genre-that-fits-your-sound-add-user.png" alt="S"width="30px" height="40px"></a></li>
+          <a href="{% url 'accounts:contactus'  %}" class="btn btn-simple"><img src="https://www.vhv.rs/dpng/d/424-4243843_contact-us-icon-in-black-ndash-free-icons.png" alt="C" width="30px" height="40px"></a>
 
              {% endif %}
          </ul>

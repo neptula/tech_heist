@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from ckeditor.fields import RichTextField
 # Create your models here.
 from django.conf import settings
@@ -25,7 +22,7 @@ class Post(models.Model):
         return self.message
 
     def save(self, *args, **kwargs):
-        self.message_html = self.message#misaka.html(self.message)
+        self.message_html = self.message
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

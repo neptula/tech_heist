@@ -36,9 +36,9 @@
 .box::before{
     content: '';
     position: absolute;
-    width: 150px;
+    width: 1000px;
     height: 1000px;
-    background: linear-gradient(aqua, chartreuse);
+    background: linear-gradient(aqua, rgb(250, 5, 197));
     animation: animate 3s linear infinite;
 }
 .box::after{

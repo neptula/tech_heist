@@ -18,44 +18,18 @@
 <body
   background="https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
   <div class="kl">
-    <h1>Welcome to Blogger</h1>
-    <img class="ig" src="https://learn.g2.com/hubfs/iStock-961319906.jpg" alt="nopic">
+    <h1 class="text-left">Search Results Corresponding to <b>"{{query}}"</b></h1>
+    <br>
+    <hr>
   </div>
 </body>
 
-<div style="padding-bottom: 70px;">
-
-  {% if user.is_authenticated %}
-  <a href="blog/writeblog/">
-    <p id="startWritingBtn">
-      <button id="button" class="BT-OH-BR-R6-NF-FH-FP-TU-PT">
-        <canvas id="canvas"></canvas>
-        <hover></hover>
-        <span>
-          Start Writing
-        </span>
-
-      </button>
-
-    </p>
-  </a>
-  {%else%}
-  <a href="accounts/login/">
-    <p id="startWritingBtn">
-      <button id="button" class="BT-OH-BR-R6-NF-FH-FP-TU-PT">
-        <canvas id="canvas"></canvas>
-        <hover></hover>
-        <span>Login To Start Writing</span>
-
-      </button>
-
-    </p>
-  </a>
-  {%endif%}
-</div>
 
 
+{% if allBlogs|length < 1 %}
+    <p class="bg-light">No Search Results   [I didnt added any Style I'll add Later On]</p>
 
+{% endif %}
 
 <div class="d-flex flex-row" style="flex-wrap: wrap;">
 
@@ -65,7 +39,7 @@
       <div class="card-body d-flex flex-column align-items-start">
         <strong class="d-inline-block mb-2 text-success">written by {{blog.author}}</strong>
         <h3 class="mb-0">
-          <a class="text-dark" href="blog/showblog/{{blog.slug}}">{{ blog.title }}</a>
+          <a class="text-dark" href="/blog/templates/showBlog.html">{{ blog.title }}</a>
         </h3>
         <div class="mb-1 text-muted">{{blog.timestamp}}</div>
         <p class="card-text mb-auto">{{blog.content| truncatechars:170}}</p>
@@ -83,7 +57,3 @@
 </div>
 
 {%endblock%}
-
-{% block linkjs%}
-<script src="{% static 'js/button.js'%}"></script>
-{% endblock %}

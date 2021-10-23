@@ -1,7 +1,16 @@
 {% extends "groups/group_base.html" %}
+
+
+ {% block linkcss%}
+
+{% load static%}
+<link rel="stylesheet" href="{%static 'css/group_form.css'%}">
+{%endblock%} 
+
 {% load bootstrap4 %}
 
 {% block group_content %}
+
 <h4>Create A New Group</h4>
   <form method="POST" action="{% url 'groups:create' %}" id="groupForm">
   	{% csrf_token %}

@@ -1,9 +1,11 @@
 {% extends "groups/group_base.html" %}
 
  {% block linkcss%}
-
+ 
+  
 {% load static%}
 <link rel="stylesheet" href="{%static 'css/group_list.css'%}">
+<link rel="stylesheet" href="{%static 'css/loader.css'%}">
 {%endblock%} 
 
 {% block pregroup %}
@@ -47,6 +49,17 @@
 			</div>
 		</a>
 		{% endfor %}
+	</div>
+</div>
+<div id="preloader">
+	<div id="loader">
+		<div class="line-scale-pulse-out">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
 	</div>
 </div>
 {% endblock %}

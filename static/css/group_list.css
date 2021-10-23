@@ -1,0 +1,11 @@
+body{
+    background: linear-gradient(to right, #effa8e 0%, #f7d5cf 100%);
+}
+
+.list-group-item{
+    background: linear-gradient(to right, #e3e6e2 0%, #f3f3c7 100%);
+
+}
+.badge{
+    color: hotpink;
+}

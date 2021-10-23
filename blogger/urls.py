@@ -28,9 +28,6 @@ urlpatterns = [
     path('groups/', include('groups.urls' ,namespace='groups')),
     path('posts/', include('posts.urls' ,namespace='posts')),
     path('blog/', include('blog.urls')),
-    path('search/', views.search,name='search'),
-    path('search/blog/', include('blog.urls')),
-
 
 ]
 

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
     'groups',
     'posts',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'ckeditor',
     'django_s3_sqlite',
+
 ]
 
 MIDDLEWARE = [

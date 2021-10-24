@@ -1,17 +1,55 @@
 {% extends "base.html" %} {% load humanize %} {% load extras %}
+{% block linkcss%}  
+{% load static%}
+
+<link rel="stylesheet" href="{%static 'css/loader.css'%}">
+{%endblock%} 
 {%block content%} 
 
-
-slug:--entered in {{blog.slug}}
-<br />
-<hr />
-Blog Title:--entered in {{blog.title}}
-<br />
-<hr />
-Blog Title:--entered in {{blog.content}}
-
-
-
+<div class="jumbotron">slug:--entered in {{blog.slug}}
+    <br />
+    <hr /></div>
+<div class="container">Blog Title:--entered in <strong>{{blog.title}}</strong>
+    <br />
+    <hr />
+    Blog Title:--entered in {{blog.content}}</div>
+    <br>
+    <br>
+</div>
+     <div class="container">
+        <table>
+            <thead>
+                <th> <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div></th>
+                <th> <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div></th>
+                <th> <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div></th>
+            </thead>
+        </table>  
+       
+    </div>
 
 <div class="container p-5">
     <h3>Comments ({{comments.count}})</h3>
@@ -91,6 +129,6 @@ Blog Title:--entered in {{blog.content}}
         </div>
         {% endfor %}
     </div>
-</div>
+
 
 {% endblock%}

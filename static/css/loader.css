@@ -7,6 +7,17 @@
   
   }
 
+  #preloader {
+ 
+  text-align: center;
+  display: table;
+}
+
+.no-js #preloader,
+.oldie #preloader {
+  display: none;
+}
+
   #loader {
     display: table-cell;
     text-align: center;

@@ -42,7 +42,9 @@
           <a class="text-dark" href="blog/showblog/{{blog.slug}}">{{ blog.title }}</a>
         </h3>
         <div class="mb-1 text-muted">{{blog.timestamp}}</div>
-        <p class="card-text mb-auto">{{blog.content| truncatechars:170}}</p>
+        <div class="preview">
+        <p class="card-text mb-auto">{{blog.content|safe|truncatechars:170}}</p>
+        </div>
         <a href="blog/showblog/{{ blog.slug }}">Continue reading</a>
       </div>
       <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
@@ -57,3 +59,7 @@
 </div>
 
 {%endblock%}
+
+{% block linkjs%}
+<script src="{% static 'js/previewOfBlog.js'%}"></script>
+{% endblock %}

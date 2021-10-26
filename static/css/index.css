@@ -1,0 +1,13 @@
+body {
+    background : linear-gradient(to right, #89f77f 0%, #cfd9f7 100%);
+    font: 14px/1.6em sans-serif;
+  }
+h1{
+  align: center;
+  padding-bottom: 20px;
+}
+
+.flex-column{
+  background : linear-gradient(to right, #89f77f 0%, #cfd9f7 100%);
+}
+  

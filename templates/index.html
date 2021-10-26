@@ -10,18 +10,22 @@
 {% load static %}
 {% block linkcss%}
 <link rel="stylesheet" href="{%static 'css/button.css'%}">
-
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
 {%block content%}
 
 <body
-  background="https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-  <div class="kl">
+   <div class="kl">
     <h1>Welcome to Blogger</h1>
-    <img class="ig" src="https://learn.g2.com/hubfs/iStock-961319906.jpg" alt="nopic">
+   <div class="write" align="left">
+    
+    <h2>Always had a thought to start a Blog?!</h2>
+    <h3>We are here to help u follow your passion.</h3>
+    <h3>Get Started now to create your own Blog</h3>
+    </div>
   </div>
-</body>
+
 
 <div style="padding-bottom: 70px;">
 
@@ -89,4 +93,5 @@
 {% block linkjs%}
 <script src="{% static 'js/previewOfBlog.js'%}"></script>
 <script src="{% static 'js/button.js'%}"></script>
+</body>
 {% endblock %}

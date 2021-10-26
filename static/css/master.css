@@ -1,6 +1,10 @@
+.mynav{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
 .d {
-	 
-    background-color: rgb(248, 238, 238);
+    background-color: rgb(250, 248, 248);
     animation-name: example;
     animation-duration: 4s;
   }
@@ -13,7 +17,7 @@
   }
   .kl{
     text-align: center;
-    color: blanchedalmond;
+    color: rgb(41, 38, 33);
   }
   .kll{
     text-align: center;
@@ -23,4 +27,7 @@
     height: 500px;
     width:500px;
     
+  }
+.tech{
+      font-size: 20px;
   }

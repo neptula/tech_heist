@@ -3,11 +3,14 @@ body {
     font: 14px/1.6em sans-serif;
   }
 h1{
-  align: center;
+  text-align: center;
   padding-bottom: 20px;
 }
 
 .flex-column{
   background : linear-gradient(to right, #89f77f 0%, #cfd9f7 100%);
 }
-  
+.techfont{
+  font-size: 1.5em;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}  

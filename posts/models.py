@@ -32,7 +32,7 @@ class Post(models.Model):
                 "pk": self.pk
             }
         )
-
+   
     class Meta:
         ordering = ["-created_at"]
         unique_together = ["user", "message"]

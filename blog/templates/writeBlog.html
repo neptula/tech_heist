@@ -1,29 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
+
 {% block content %}
-<div class="container writeFormContainer ">
-
-    <form class="bg-light form-control" action="/blog/writeblog/" method="POST">
-        {% csrf_token%}
-        <label for="title">Title of Blog :-</label>
-            <input type="text" class="form-control" placeholder="Enter Title of Your Title" id="title" name="title" value='{{title}}' required>
-        <label for="author">Name Of Author :- </label>
-            <input type="text"  class="form-control" placeholder="Enter Your Name" id="author" name="author" value='{{author}}' required>
-        <label for="content"> Content :-</label>
-            <textarea type="text" class="form-control" placeholder="Enter Content Of Your Blog" id="content" name="content" required>{{content}}</textarea>
-        <input type="submit" class="btn-sm btn-dark my-2" ></input>
-
-    </form>
+<div class="container">
+We will add here a form which will take blogs
 </div>
 
 
 
 
-{% endblock %}
-
-{% block linkjs %}
-<script src="{% static 'ckeditor/ckeditor.js'%}"></script>
-<script>
-    CKEDITOR.replace('content');
-</script>
 {% endblock %}

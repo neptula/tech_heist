@@ -6,7 +6,32 @@ from blog.models import blogDb, blogComment
 from blog.templatetags import extras
 
 def writeblog(request):
-  return render(request, 'writeBlog.html')
+  if request.method =='POST':
+    title=request.POST.get('title')
+    author=request.POST.get('author')
+    content=request.POST.get('content')
+    # some checks of form
+
+    if blogDb.objects.filter(title=title).exists():
+      # messages.error(request,'Choose Unique Title')
+      params={'title':title, 'author':author,'content':content}
+      messages.warning(request, ' Choose Unique Title')
+      return render(request, 'writeBlog.html', params)
+
+
+
+
+
+
+    else:
+      newBlog=blogDb(title=title, author=author, content=content)
+      newBlog.save()
+      blog=blogDb.objects.get(title=title)
+      return redirect(f"/blog/showblog/{blog.slug}")
+  else:
+    params={'title':"", 'author':"",'content':""}
+    return render(request, 'writeBlog.html')
+
 
 
 def showblog(request, slug=None):

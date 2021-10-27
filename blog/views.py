@@ -4,16 +4,62 @@ from django.contrib import messages
 # Create your views here.
 from blog.models import blogDb, blogComment
 from blog.templatetags import extras
+from blog.forms import writeBlogForm
+
+def editblog(request, slug=None):
+  blog = blogDb.objects.get(slug = slug)
+  initVal = {
+    'title': blog.title,
+    'content': blog.content,
+  }
+  form = writeBlogForm(initial=initVal)
+  params={ 'form':form, 'slug':slug }
+  if request.method == 'POST':
+    titlepost = request.POST.get('title')
+    contentpost = request.POST.get('content')
+    blog.title = titlepost
+    blog.content = contentpost
+    blog.save()
+    blog = blogDb.objects.get(title = titlepost)
+    return redirect(f"/blog/showblog/{blog.slug}")
+  else:
+    
+    return render(request, 'editblog.html', context=params)
 
 def writeblog(request):
-  return render(request, 'writeBlog.html')
+
+  if request.method =='POST':
+    title=request.POST.get('title')
+    author=request.POST.get('author')
+    content=request.POST.get('content')
+    initVal = {'title':title, 'content':content}
+    form = writeBlogForm(initial = initVal)
+    # some checks of form
+
+    if blogDb.objects.filter(title=title).exists():
+      # messages.error(request,'Choose Unique Title')
+      params={'title':title, 'author':author,'content':content, 'form':form}
+      messages.warning(request, ' Choose Unique Title')
+      return render(request, 'writeBlog.html', context = params)
+
+    else:
+      newBlog=blogDb(title=title, author=author, content=content)
+      newBlog.save()
+      blog=blogDb.objects.get(title=title)
+      return redirect(f"/blog/showblog/{blog.slug}")
+  else:
+    form = writeBlogForm()
+    params={'title':"", 'author':"",'content':"", 'form':form}
+    return render(request, 'writeBlog.html', context = params)
+
 
 
 def showblog(request, slug=None):
   blog = blogDb.objects.get(slug = slug)
   comments = blogComment.objects.filter(blog=blog, parent=None)
   replies = blogComment.objects.filter(blog=blog).exclude(parent=None)
-
+  blog.views = blog.views +1 
+  blog.save();
   # Here I will create Dictionary for replies
   replyDict = {}
   for reply in replies:

@@ -29,9 +29,6 @@ urlpatterns = [
     path('posts/', include('posts.urls' ,namespace='posts')),
     path('blog/', include('blog.urls')),
     path('search/', views.search,name='search'),
-    path('search/blog/', include('blog.urls')),
-
-
 ]
 
  

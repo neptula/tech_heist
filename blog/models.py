@@ -10,6 +10,7 @@ class blogDb(models.Model):
     author = models.CharField(max_length = 100)
     slug = models.SlugField(unique = True, null = True, blank = True)
     content = RichTextField(blank=True, null=True)
+    views = models.IntegerField(default=0)
     # content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True,blank=True)
     def __str__(self):

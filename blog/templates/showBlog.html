@@ -1,25 +1,34 @@
 {% extends "base.html" %} {% load humanize %} {% load extras %}
-{% block linkcss%}  
+{% block linkcss%}
 {% load static%}
 
 <link rel="stylesheet" href="{%static 'css/loader.css'%}">
-{%endblock%} 
-{%block content%} 
+{%endblock%}
+{%block content%}
 
-<div class="jumbotron">slug:--entered in {{blog.slug}}
-    <br />
-    <hr /></div>
-<div class="container">Blog Title:--entered in <strong>{{blog.title}}</strong>
+<div class="jumbotron">
+
+
+
+    <div class="container" id="titleContainer">Blog Title <h4><strong>{{blog.title}}</strong></h4>
+        <p>(Total views:{{blog.views}})</p>
+    </div>
     <br />
     <hr />
-    Blog Title:--entered in {{blog.content|safe}}</div>
-    <br>
-    <br>
+
+    <div class="container" id="contentContainer"> Blog Content {{blog.content|safe}}</div>
+    {% if user.username == blog.author %}
+        <div class="container">
+            <a href="{% url 'blog:editblog' slug=blog.slug %}"> <button  class="btn-sm btn-danger px-3">Edit</button></a>
+        </div>
+    {% endif %}
 </div>
-     <div class="container">
-        <table>
-            <thead>
-                <th> <div id="loader">
+</div>
+<div class="container">
+    <table>
+        <thead>
+            <th>
+                <div id="loader">
                     <div class="line-scale-pulse-out">
                         <div></div>
                         <div></div>
@@ -27,8 +36,10 @@
                         <div></div>
                         <div></div>
                     </div>
-                </div></th>
-                <th> <div id="loader">
+                </div>
+            </th>
+            <th>
+                <div id="loader">
                     <div class="line-scale-pulse-out">
                         <div></div>
                         <div></div>
@@ -36,8 +47,10 @@
                         <div></div>
                         <div></div>
                     </div>
-                </div></th>
-                <th> <div id="loader">
+                </div>
+            </th>
+            <th>
+                <div id="loader">
                     <div class="line-scale-pulse-out">
                         <div></div>
                         <div></div>
@@ -45,11 +58,12 @@
                         <div></div>
                         <div></div>
                     </div>
-                </div></th>
-            </thead>
-        </table>  
-       
-    </div>
+                </div>
+            </th>
+        </thead>
+    </table>
+
+</div>
 
 <div class="container p-5">
     <h3>Comments ({{comments.count}})</h3>
@@ -65,7 +79,8 @@
             <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
         </form>
         {% else %}
-        <input class="form-control w-50 my-2" disabled="true" type="text" name="comment" placeholder="Enter Comment Here" />
+        <input class="form-control w-50 my-2" disabled="true" type="text" name="comment"
+            placeholder="Enter Comment Here" />
         <a><button class="btn btn-simple">Login To Post any Comment</button></a>
 
         {% endif %}
@@ -73,57 +88,60 @@
     <div class="container px-5">
         {%for comment in comments %}
         <div class="row m-2 border border-danger" style="border-radius: 5px">
-            <div class="col-md-1 bg-light p-2  "style="border-radius: 5px;"><img class="w-100" src="/static/images/defaultProfile.png" style="border: hidden; border-radius: 100px;" ></div>
+            <div class="col-md-1 bg-light p-2  " style="border-radius: 5px;"><img class="w-100"
+                    src="/static/images/defaultProfile.png" style="border: hidden; border-radius: 100px;"></div>
 
             <div class="col-md-11 bg-light" style="border-radius: 5px;">
                 <b class="badge bg-warning text-dark">{{comment.user.username}}</b>
-                
-                    <small style="font-size: small">({{comment.timestamp | naturaltime}})</small>
-                
+
+                <small style="font-size: small">({{comment.timestamp | naturaltime}})</small>
+
                 <div>&nbsp;&nbsp;&nbsp;&nbsp; {{comment.comment}}</div>
                 <div class="reply mx-0">
                     <!-- Now we will Show replies -->
                     <div class="replies bg-light my-2">
                         {% if user.is_authenticated %}
 
-                    <button class="btn-sm btn-simple btn-outline-dark" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false"
-                        aria-controls="replyBox{{comment.sno}}">
-                        Reply
-                    </button>
-                    <div class="collapse" id="replyBox{{comment.sno}}">
-                        <!-- first we will take replies -->
-                        <div class="card card-body mt-2 bg-light">
-                            <form action="/blog/postComment" method="POST">
-                                {% csrf_token %}
-                                <input class="form-control w-50 my-2" type="text" name="comment"
-                                    placeholder="Enter Your Reply For Comment Here" />
-                                <input type="hidden" name="parentSno" value="{{comment.sno}}" />
-                                <input type="hidden" name="blogSno" value="{{blog.sno}}" />
+                        <button class="btn-sm btn-simple btn-outline-dark" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                            aria-controls="replyBox{{comment.sno}}">
+                            Reply
+                        </button>
+                        <div class="collapse" id="replyBox{{comment.sno}}">
+                            <!-- first we will take replies -->
+                            <div class="card card-body mt-2 bg-light">
+                                <form action="/blog/postComment" method="POST">
+                                    {% csrf_token %}
+                                    <input class="form-control w-50 my-2" type="text" name="comment"
+                                        placeholder="Enter Your Reply For Comment Here" />
+                                    <input type="hidden" name="parentSno" value="{{comment.sno}}" />
+                                    <input type="hidden" name="blogSno" value="{{blog.sno}}" />
 
-                                <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
-                            </form>
+                                    <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    {% else %}
-                    <a><button class="btn btn-simple">Login To Post any Reply</button></a>
+                        {% else %}
+                        <a><button class="btn btn-simple">Login To Post any Reply</button></a>
                         {% endif %}
                         {% for reply in replyDict|get_val:comment.sno %}
                         <div class="row m-2 p-1 border border-secondary" style="border-radius: 5px">
-                            <div class="col-md-1 d-flex p-3 align-center justify-center "><img class="w-100 " src="/static/images/defaultProfile.png"  style="border: hidden; border-radius: 100px;"></div>
+                            <div class="col-md-1 d-flex p-3 align-center justify-center "><img class="w-100 "
+                                    src="/static/images/defaultProfile.png"
+                                    style="border: hidden; border-radius: 100px;"></div>
                             <div class="col-md-11 bg-light">
                                 <b class="badge bg-warning text-dark">{{reply.user.username}}</b>
-                               
-                                    <small style="font-size: small">({{reply.timestamp | naturaltime}})</small>
-                               
+
+                                <small style="font-size: small">({{reply.timestamp | naturaltime}})</small>
+
                                 <div>&nbsp;&nbsp;&nbsp;&nbsp; {{reply.comment}}</div>
 
-                                </div>
                             </div>
+                        </div>
                         {% endfor %}
                     </div>
 
-                    
+
                 </div>
             </div>
         </div>
@@ -131,4 +149,9 @@
     </div>
 
 
-{% endblock%}
+    {% endblock%}
+
+    {% block linkjs %}
+
+
+    {% endblock linkjs %}

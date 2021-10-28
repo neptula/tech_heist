@@ -10,18 +10,24 @@
 
 
 
-    <div class="container" id="titleContainer">Blog Title <h4><strong>{{blog.title}}</strong></h4>
+    <div class="container" id="titleContainer"><h3><strong>{{blog.title}}</strong></h3>
         <p>(Total views:{{blog.views}})</p>
+        <div class="fb-like" data-href="http://127.0.0.1:8000/groups/posts/in/quantum-physics/" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+
     </div>
     <br />
     <hr />
 
-    <div class="container" id="contentContainer"> Blog Content {{blog.content|safe}}</div>
+    <div class="container" id="contentContainer">  {{blog.content|safe}}</div>
+    <br />
+    <hr />
+    <div class="fb-comments" data-href="http://127.0.0.1:8000/groups/" data-width="" data-numposts="5"></div>
     {% if user.username == blog.author %}
         <div class="container">
             <a href="{% url 'blog:editblog' slug=blog.slug %}"> <button  class="btn-sm btn-danger px-3">Edit</button></a>
         </div>
     {% endif %}
+
 </div>
 </div>
 <div class="container">

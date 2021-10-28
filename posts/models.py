@@ -16,6 +16,8 @@ class Post(models.Model):
     message = RichTextField(blank=True, null=True)
     message_html = models.TextField(editable=False)
     group = models.ForeignKey(Group, related_name="posts",null=True, blank=True,on_delete=models.CASCADE)
+    likes=models.ManyToManyField(User,related_name='likes',blank=True)
+    dislikes=models.ManyToManyField(User,related_name='dislikes',blank=True)
 
     def _str_(self):
         return self.message

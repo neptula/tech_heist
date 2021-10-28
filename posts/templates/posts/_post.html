@@ -5,7 +5,7 @@
 {%endblock%} 
 
 <div class="post media">
-	<h3 style="color:black;font-size: 15px; align:left;">{{ post.message_html|safe }}</h3>
+	<h3 style="color:black;font-size: 15px; text-align:left;">{{ post.message_html|safe }}</h3>
 	<div class="media-body">
 		<strong>&nbsp;&nbsp;&nbsp;&nbsp;author: {{ post.user.username }}</strong>
 		<h5 class="media-heading" style="color:black;font-size: 12px;">
@@ -27,4 +27,21 @@
 				</a>
 			{% endif %}
 		</div>
+		<div class="d-flex flex-row">
+			<form method="POST" action="{% url 'posts:like' post.pk %}">
+				{% csrf_token %}
+				<input type="hidden" name="next" value="{{ request.path }}">
+				<button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+					<img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" width="40px" height="40px">{{ post.likes.all.count }}
+				</button>
+			</form>
+		
+			<form method="POST" action="{% url 'posts:dislike' post.pk %}">
+				{% csrf_token %}
+				<input type="hidden" name="next" value="{{ request.path }}">
+				<button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+				<img src="https://image.similarpng.com/very-thumbnail/2020/08/Facebook-dislike-icon-premium-vector-PNG.png" width="30px" height="30px" alt="">	{{ post.dislikes.all.count }}
+				</button>
+			</form>
+		  </div>
 	</div>

@@ -1,15 +1,17 @@
 {% extends "base.html" %}
  {% block linkcss%}
-
 {% load static%}
-<link rel="stylesheet" href="{%static 'css/login.css'%}">
+<link rel="stylesheet" href="{% static 'css/login.css' %} ">
+
 {%endblock%} 
 
 {%load bootstrap4%}
 {%block content%}
-<div class="mainContainerCSS">
+<div id="loginContainer">
+    
+    <div class="mainContainerCSS">
 
-    <div class="box">
+        <div class="box">
         <div id="cssStyle" style="min-width: 700px;">
 
             <strong>
@@ -19,15 +21,16 @@
             <form method="POST">
                 {% csrf_token %}
                 {%bootstrap_form form%}
-
+                
                 <div style="display: flex; flex-direction: column;">
-
+                    
                     <input class="mt-2 py-2" type="Submit" class="btn btn-default" value="login" style="border-radius: 10px;margin-left: 180px;
             margin-right: 180px; font-size: large; ">
                 </div>
             </form>
         </div>
     </div>
+</div>
 </div>
 {%endblock%}
 

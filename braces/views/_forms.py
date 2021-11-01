@@ -14,7 +14,6 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
-import six
 
 
 class CsrfExemptMixin(object):

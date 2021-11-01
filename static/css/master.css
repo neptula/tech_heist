@@ -1,33 +1,26 @@
-.mynav{
-    padding-top: 8px;
-    padding-bottom: 8px;
+.mycontent{
+  padding-top: 100px;
+ border: 10px solid red;
 }
 
-.d {
-    background-color: rgb(248, 247, 247);
-    animation-name: example;
-    animation-duration: 4s;
-  }
-  
-  @keyframes example {
-    0%   {background-color: rgb(204, 156, 156);}
-    25%  {background-color: rgb(243, 243, 187);}
-    50%  {background-color: rgb(93, 93, 99);}
-    100% {background-color: rgb(180, 223, 180);}
-  }
-  .kl{
-    text-align: center;
-    color: rgb(41, 38, 33);
-  }
-  .kll{
-    text-align: center;
-    color: rgb(109, 70, 12);
-  }
-  .ig{
-    height: 500px;
-    width:500px;
-    
-  }
-.tech{
-      font-size: 20px;
-  }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #240cda;
+  margin: 0;
+}
+
+
+#note {
+  position: absolute;
+  color: rgba(249,241,204,1);
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: auto;
+  text-align: center;
+  user-select: none;
+  font-family: Arial;
+}

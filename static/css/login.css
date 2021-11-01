@@ -1,16 +1,24 @@
- /* *{
-    margin: 0;   
-    padding: 0;
-    box-sizing: border-box;
+body {
+    overflow: hidden;
+    background-color: rgb(70, 12, 67);
+    color: white;
+  }
 
-} */
+
+#loginContainer{
+    display: flex;
+    justify-content: center;
+
+}
+
 .mainContainerCSS{
+    position: absolute;
+
     display: flex;
     justify-content: center;
     align-items: center;
     /* margin-top: 120px; */
-    min-height: 92.5vh;
-    background: #cfd9f7;
+    min-height: 90vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
@@ -36,9 +44,9 @@
 .box::before{
     content: '';
     position: absolute;
-    width: 1000px;
-    height: 1000px;
-    background: linear-gradient(aqua, rgb(250, 5, 197));
+    width: 900px;
+    height: 900px;
+    background: linear-gradient(aqua, rgb(250, 5, 238));
     animation: animate 3s linear infinite;
 }
 .box::after{
@@ -46,7 +54,7 @@
     position: absolute;
     inset: 4px;
     /* offset: 5px; */
-    background: #f0f0f5;
+    background:transparent;
     border-radius: 16px;
 }
 @keyframes animate{

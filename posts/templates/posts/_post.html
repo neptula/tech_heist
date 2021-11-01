@@ -5,7 +5,7 @@
 {%endblock%} 
 
 <div class="post media">
-	<h3 style="color:black;font-size: 15px; text-align:left;">{{ post.message_html|safe }}</h3>
+	<h3 style="color:white;font-size: 15px; text-align:left;">{{ post.message_html|safe }}</h3>
 	<div class="media-body">
 		<strong>&nbsp;&nbsp;&nbsp;&nbsp;author: {{ post.user.username }}</strong>
 		<h5 class="media-heading" style="color:black;font-size: 12px;">
@@ -19,7 +19,7 @@
 
 
 
-		<div class="media-footer">
+		<div class="media-footer hg">
 			{% if user.is_authenticated and post.user == user and not hide_delete %}
 				<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
 					<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
@@ -27,7 +27,7 @@
 				</a>
 			{% endif %}
 		</div>
-		<div class="d-flex flex-row">
+		<div class="d-flex flex-row hg">
 			<form method="POST" action="{% url 'posts:like' post.pk %}">
 				{% csrf_token %}
 				<input type="hidden" name="next" value="{{ request.path }}">

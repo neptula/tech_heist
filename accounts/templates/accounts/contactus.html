@@ -1,31 +1,60 @@
 {% extends "base.html" %}
 
 {%load bootstrap4%}
-{%block content%}
+{%block linkcss%}
 
-<div class="container my-3" style="max-width: 800px;">
+<style>
+  body {
+    overflow: hidden;
+    background-color: rgb(9, 36, 77);
+    color: white;
+  }
+  #contactUsForm {
+    align-items: center;
+    position: absolute;
+    font-family: cursive;
+    max-width: 700px;
+    border: 2px solid rgb(224 211 211);
+    border-radius: 20px
+  }
+
+  #contactUsContainer {
+    display: flex;
+    justify-content: center;
+
+  }
+</style>
+{%endblock%}
+{%block content%}
+<div id="contactUsContainer">
+
+  <div id="contactUsForm" class="container my-3 p-5" style="max-width: 800px;">
+    <h3 class="text-center">Contact Us Form</h3>
     <form method="POST" action="/accounts/contactus/">
       {% csrf_token %}
-  
-        <div class="mb-3">
-          <label for="Username" class="form-label">UserName</label>
-          <input type="text" class="form-control" id="Username" name="Username" aria-describedby="emailHelp" placeholder="Username">
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" name="mailid" class="form-control" id="email" placeholder="Enter Your Working Email">
-        </div>
-        <div class="mb-3">
-          <label for="phoneNo" class="form-label">Contact No</label>
-          <input type="text" name="phoneNo"class="form-control" id="phoneNo" placeholder="Enter Your Working Contact no">
-        </div>
-        <div class="mb-3">
-          <label for="issue" class="form-label">Describe Your Issue:</label>
-          
-          <textarea name="issue" placeholder="Describe Your Issue or Suggestions in Detail" class="form-control" id="issue" cols="30" rows="5"></textarea>
-        </div>
-      
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+
+      <div class="mb-3">
+        <label for="Username" class="form-label">UserName</label>
+        <input type="text" class="form-control" id="Username" name="Username" aria-describedby="emailHelp"
+          placeholder="Username">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="mailid" class="form-control" id="email" placeholder="Enter Your Working Email">
+      </div>
+      <div class="mb-3">
+        <label for="phoneNo" class="form-label">Contact No</label>
+        <input type="text" name="phoneNo" class="form-control" id="phoneNo" placeholder="Enter Your Working Contact no">
+      </div>
+      <div class="mb-3">
+        <label for="issue" class="form-label">Describe Your Issue:</label>
+
+        <textarea name="issue" placeholder="Describe Your Issue or Suggestions in Detail" class="form-control"
+          id="issue" cols="30" rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="btn-sm btn-light">Submit</button>
+    </form>
+  </div>
 </div>
 {%endblock%}

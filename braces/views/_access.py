@@ -15,8 +15,6 @@ except ImportError:
     from django.utils.encoding import force_text as force_string
 from django.utils.timezone import now
 
-import six
-
 
 class AccessMixin(object):
     """

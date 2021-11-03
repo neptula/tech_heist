@@ -1,0 +1,41 @@
+body {
+    overflow-x: hidden;
+    background-color: rgb(75, 9, 77);
+    color: white;
+    height: auto;
+  }
+
+#mainForm {
+    font-family: cursive;
+    border-radius: 10px;
+    align-items: center;
+    position: absolute;
+    margin-left: 200px;
+    padding-top: 30px;
+  }
+
+#mainFormContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+.bootstrap-select .bs-ok-default::after {
+    width: 300%;
+    height: 0.6em;
+    border-width: 0 0.1em 0.1em 0;
+    transform: rotate(45deg) translateY(0.5rem);
+  }
+
+  .btn.dropdown-toggle:focus {
+    outline: none !important;
+  }
+  .bootstrap-select>.dropdown-toggle {
+    width: 200%;
+  }
+  .bootstrap-select .dropdown-menu {
+    min-width: 20%;
+  }
+ .show{
+  max-height: 200px; 
+ }
+

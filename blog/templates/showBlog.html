@@ -3,6 +3,11 @@
 {% load static%}
 
 <link rel="stylesheet" href="{%static 'css/loader.css'%}">
+<style>
+    body{
+        color: black;
+    }
+</style>
 {%endblock%}
 {%block content%}
 
@@ -17,6 +22,14 @@
     </div>
     <br />
     <hr />
+    <div class="text-dark">
+        {% for tag in tagsArr %}
+        {% if tag %}
+
+            <u><span>#{{tag}}</span></u>
+        {% endif %}
+        {% endfor %}
+    </div>
 
     <div class="container" id="contentContainer">  {{blog.content|safe}}</div>
     <br />

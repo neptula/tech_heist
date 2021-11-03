@@ -2,52 +2,46 @@
 {% load static %}
 {% load bootstrap4 %}
 
-
-
 {% block linkcss %}
-<style>
-  body {
-    overflow-x: hidden;
-    background-color: rgb(75, 9, 77);
-    color: white;
-  }
-  #mainForm {
-    font-family: cursive;
-    border-radius: 10px;
-    align-items: center;
-    position: absolute;
-    margin-left: 200px;
-    padding-top:30px;
-  } 
 
-  #mainFormContainer {
-    display: flex;
-    justify-content: center;
-  }
-</style>
+  <link rel="stylesheet" href="{% static 'css/writeblog.css' %}">
 {% endblock %}
 
 {% block content %}
 <div id="mainFormContainer">
 
-  <div class="container" id="mainForm" >
+  <div id="mainForm" class="container">
     <h3 style="margin-left: 220px ; color: coral; padding-bottom: 20px;">Edit Your Blog Here</h3>
-    
-    <form method="POST" action="/blog/editblog/{{slug}}"  style="max-width:840px">
+    <form method="POST" action="/blog/editblog/{{slug}}" style="max-width:840px">
       {% csrf_token %}
       {% bootstrap_form form %}
       {{form.media}}
+      <label>Select tags For your Blog</label>
+      <br>
       <input type="hidden" name="author" id="author" value="{{user.username}}">
+      <select multiple data-style="bg-white px-4 py-3 mb-3 shadow-sm " id="selectpickerid" 
+        class="selectpicker w-50">
+        <option>#JavaScript </option>
+        <option>#Python flask </option>
+        <option>#Python </option>
+        <option>#C++ </option>
+        <option>#Java </option>
+        <option>#HTML </option>
+        <option>#Bootstrap </option>
+        <option>#Django </option>
+        <option>#PHP </option>
+      </select><!-- End -->
+      <input id="hiddenSelected" type="hidden" name="tags">
+      <br>
       <button type="submit" class="btn-sm btn-light">Submit</button>
-      
     </form>
-    
   </div>
 </div>
-  
+
 
 
 {% endblock %}
 
 {% block linkjs %}
+<script src="{% static 'js/writeblog.js' %}"></script>
 {% endblock %}

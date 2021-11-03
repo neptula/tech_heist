@@ -17,8 +17,10 @@ def editblog(request, slug=None):
   if request.method == 'POST':
     titlepost = request.POST.get('title')
     contentpost = request.POST.get('content')
+    tagspost = request.POST.get('tags')
     blog.title = titlepost
     blog.content = contentpost
+    blog.tags = tagspost
     blog.save()
     blog = blogDb.objects.get(title = titlepost)
     return redirect(f"/blog/showblog/{blog.slug}")
@@ -32,18 +34,20 @@ def writeblog(request):
     title=request.POST.get('title')
     author=request.POST.get('author')
     content=request.POST.get('content')
+    tags = request.POST.get('tags')
+    tagsArr=tags.split(' ')
     initVal = {'title':title, 'content':content}
     form = writeBlogForm(initial = initVal)
     # some checks of form
 
     if blogDb.objects.filter(title=title).exists():
       # messages.error(request,'Choose Unique Title')
-      params={'title':title, 'author':author,'content':content, 'form':form}
+      params={'title':title, 'author':author,'content':content,'tagsArr':tagsArr,'form':form}
       messages.warning(request, ' Choose Unique Title')
       return render(request, 'writeBlog.html', context = params)
 
     else:
-      newBlog=blogDb(title=title, author=author, content=content)
+      newBlog=blogDb(title=title, author=author, content=content, tags=tags)
       newBlog.save()
       blog=blogDb.objects.get(title=title)
       return redirect(f"/blog/showblog/{blog.slug}")
@@ -69,9 +73,11 @@ def showblog(request, slug=None):
       replyDict[reply.parent.sno].append(reply)
 
 
+  tags = blog.tags
+  tagsArr=tags.split(' ')
 
   context={
-    'blog':blog, 'comments':comments, 'replyDict':replyDict
+    'blog':blog, 'comments':comments, 'replyDict':replyDict, 'tagsArr':tagsArr
   }
   return render(request, 'showBlog.html', context)
 

@@ -34,7 +34,6 @@
     <div class="container" id="contentContainer">  {{blog.content|safe}}</div>
     <br />
     <hr />
-    <div class="fb-comments" data-href="http://127.0.0.1:8000/groups/" data-width="" data-numposts="5"></div>
     {% if user.username == blog.author %}
         <div class="container">
             <a href="{% url 'blog:editblog' slug=blog.slug %}"> <button  class="btn-sm btn-danger px-3">Edit</button></a>

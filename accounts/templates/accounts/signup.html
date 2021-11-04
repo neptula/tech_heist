@@ -16,6 +16,12 @@
         justify-content: center;
 
     }
+    .bootstrap-select>.dropdown-toggle{
+        width: 200%;
+    }
+    .show{
+        width:600px
+    }
 </style>
 {%endblock%}
 {%block content%}
@@ -24,13 +30,64 @@
     <div class="container p-5 my-3" id="signUpForm"
     style="max-width:700px; border: 2px solid rgb(224 211 211); border-radius:20px">
     <h3 class="text-center">Sign Up</h3>
-    <form method="POST">
-        {%csrf_token%}   
-        {%bootstrap_form form%}
-        
-        <input type="Submit" class="btn-sm btn-light" value="Sign Up">
-    </form>
+    <form action= "" method='post'>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required>
+        </div>
+      
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="pass1">Choose a password</label>
+          <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
+          <small>
+              <ul>
+                  <li>Password Must Contain 8 characters</li>
+              </ul>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="pass2">Confirm Password</label>
+          <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
+          <small>
+            <ul>
+                <li>Password Must match</li>
+            </ul>
+        </small>
+        </div>
+        <label>Select your 3 interests</label>
+        <br>
+        <select multiple data-style="bg-white px-4 py-3 mb-3 shadow-sm " id="selectpickerid" 
+          class="selectpicker w-50">
+          <option>#JavaScript </option>
+          <option>#Python flask </option>
+          <option>#Python </option>
+          <option>#C++ </option>
+          <option>#Java </option>
+          <option>#HTML </option>
+          <option>#Bootstrap </option>
+          <option>#Django </option>
+          <option>#PHP </option>
+        </select><!-- End -->
+        <small>
+            <ul>
+                <li>Select maximum 3 tags</li>
+            </ul>
+        </small>
+        <input id="hiddenSelected" type="hidden" name="tags">
+      
+              {% csrf_token %}
+              <button type="submit" class="btn-sm btn-primary">Submit</button>
+      </form>
 </div>
 </div>
 {%endblock%}
 
+
+{% block linkjs %}
+    {% load static %}
+    <script src="{% static 'js/signup.js' %}"></script>
+{% endblock %}

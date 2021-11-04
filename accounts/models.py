@@ -15,3 +15,11 @@ class contact(models.Model):
         return 'Message From ' + self.name
 
 
+class userTags(models.Model):
+    username = models.CharField(max_length=255)
+    interestingTags = models.CharField(max_length=255)
+
+    def __str__(self):
+        return 'Interests of ' + self.username
+
+

@@ -1,10 +1,9 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render, HttpResponse
 from django.contrib import messages
-
-
-
+from django.contrib.auth.models import User 
 from blog.models import blogDb
+from accounts.models import userTags
 
 def index(request):
     allBlogs = blogDb.objects.all()
@@ -19,3 +18,30 @@ def search(request):
         messages.warning(request, 'No Search Results Found Please refine Your Query')
     params = {'allBlogs':allBlogs, 'query':query}
     return render(request, 'searchResults.html', params)
+
+
+def blogs(request):
+    # In this page our goal is to show blogs with priority
+    allBlogs = blogDb.objects.all()
+    username = request.user.get_username()
+    print(username)
+
+    myuser=userTags.objects.get(username=username)
+    myuserinterests=myuser.interestingTags
+    userinterestsArr=myuserinterests.split(' ')
+    for blog in allBlogs:
+        blogtags=blog.tags
+        blogtagsArr=blogtags.split(' ')
+        print(blogtagsArr)
+        blog.blogpriority = 0
+        for interest in userinterestsArr:
+            if interest:    
+                for tag in blogtagsArr:
+                    if interest == tag:
+                        blog.blogpriority=blog.blogpriority+1
+                        blog.save()
+
+
+    allBlogs = blogDb.objects.all()
+    context = {'allBlogs':allBlogs}
+    return render(request, 'blogs.html', context)

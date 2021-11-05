@@ -13,10 +13,11 @@ def index(request):
 
 def search(request):
     query = request.GET['query']
-    allBlogs = blogDb.objects.filter(title__icontains=query)
-    if allBlogs.count()== 0:
+    allBlogsTitle = blogDb.objects.filter(title__icontains=query)
+    allBlogsTags = blogDb.objects.filter(tags__icontains=query)
+    if allBlogsTitle.count()== 0 and allBlogsTags.count()==0:
         messages.warning(request, 'No Search Results Found Please refine Your Query')
-    params = {'allBlogs':allBlogs, 'query':query}
+    params = {'allBlogsTitle':allBlogsTitle, 'allBlogsTags':allBlogsTags ,'query':query}
     return render(request, 'searchResults.html', params)
 
 
@@ -24,7 +25,7 @@ def blogs(request):
     # In this page our goal is to show blogs with priority
     allBlogs = blogDb.objects.all()
     username = request.user.get_username()
-    print(username)
+    # print(username)
 
     myuser=userTags.objects.get(username=username)
     myuserinterests=myuser.interestingTags
@@ -32,7 +33,7 @@ def blogs(request):
     for blog in allBlogs:
         blogtags=blog.tags
         blogtagsArr=blogtags.split(' ')
-        print(blogtagsArr)
+        # print(blogtagsArr)
         blog.blogpriority = 0
         for interest in userinterestsArr:
             if interest:    

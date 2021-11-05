@@ -22,11 +22,14 @@
     </div>
     <br />
     <hr />
-    <div class="text-dark">
+    <div class="text-dark d-flex">
+        <b>Tags of Blog :--</b>
         {% for tag in tagsArr %}
         {% if tag %}
-
-            <u><span>#{{tag}}</span></u>
+        <form action="/search" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control" type="hidden" placeholder="Search" aria-label="Search" name="query" id="query" value="{{tag}}" style="width: 80%;">
+            <button type="submit">{{tag}}</button>
+        </form> 
         {% endif %}
         {% endfor %}
     </div>
@@ -91,7 +94,7 @@
 
         <form action="/blog/postComment" method="POST">
             {% csrf_token %}
-            <input class="form-control w-50 my-2" type="text" name="comment" placeholder="Enter Comment Here" />
+            <input class="form-control w-50 my-2" type="text" name="comment" placeholder="Enter Comment Here" required>
             <input type="hidden" name="blogSno" value="{{blog.sno}}" />
             <input type="hidden" name="parentSno" value="" />
             <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
@@ -131,7 +134,7 @@
                                 <form action="/blog/postComment" method="POST">
                                     {% csrf_token %}
                                     <input class="form-control w-50 my-2" type="text" name="comment"
-                                        placeholder="Enter Your Reply For Comment Here" />
+                                        placeholder="Enter Your Reply For Comment Here" required>
                                     <input type="hidden" name="parentSno" value="{{comment.sno}}" />
                                     <input type="hidden" name="blogSno" value="{{blog.sno}}" />
 

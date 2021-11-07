@@ -1,8 +1,11 @@
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView,UpdateView,TemplateView
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 # Create your views here.
 from . import forms
+from .forms import editprofileform
 from accounts.models import contact
 from accounts.models import userTags
 from django.contrib import messages
@@ -66,3 +69,18 @@ def contactus(request):
     messages.success(request, 'We have received Your Mail we will contact You Soon')
   return render(request, 'accounts/contactus.html')
 
+class passwordchangedview(PasswordChangeView):
+  form_class=PasswordChangeForm  
+  success_url=reverse_lazy('login')
+
+class UserEditView(UpdateView):
+  form_class=editprofileform
+  success_url=reverse_lazy('index')
+  template_name='accounts/profile_user.html'
+
+  def get_object(self):
+      return self.request.user
+
+class displayprofile(TemplateView):
+  
+  template_name='accounts/display_profile.html'

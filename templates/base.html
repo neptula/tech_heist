@@ -48,44 +48,12 @@
           <a href="{%url 'groups:all' %}" class="nav-item nav-link"><i class="fa fa-users"></i><span>Groups</span></a>
           <a href="{% url 'accounts:contactus'  %}" class="nav-item nav-link"><i
               class="fa fa-exclamation-triangle"></i><span>Contact Us</span></a>
-          <li><a  class="nav-item nav-link" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                class="fa fa-user "></i>Profile</a></li>
+              <a href="{% url 'accounts:show_profile' %}" class="nav-item nav-link"><i
+                class="fa fa-exclamation-triangle"></i><span>Profile</span></a>
+            
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-              <div class="text-center my-3">
-                <h2>Profile</h2>
-
-                <hr>
-              </div>
-
-
-              <div class="py-5 text-center">
-                <!-- We will add Profile Photo Here Of user -->
-                <img class="d-block mx-auto mb-4" src="#" alt="No pic" width="72" height="72">
-
-                We will add Complete Profile Details Here
-
-              </div>
-
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                  Close
-                </button>
-                <a href="{% url 'accounts:logout' %}"><button type="button" class="btn btn-simple"
-                    style="color: red;">Log Out</button></a>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
+       
 
         {% else %}
         <a href="{%url 'groups:all' %}" class="nav-item nav-link"><i class="fa fa-users"></i><span>Groups</span></a>

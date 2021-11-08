@@ -7,11 +7,7 @@ from accounts.models import userTags
 
 def index(request):
     allBlogs = blogDb.objects.all()
-    if allBlogs.count() > 10:
-        last_ten = blogDb.objects.all().order_by('-sno')[:10]
-        context = {'allBlogs':last_ten}
-    else:
-        context = {'allBlogs':allBlogs}
+    context = {'allBlogs':allBlogs}
     return render(request, 'index.html', context)
 
 

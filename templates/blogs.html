@@ -21,7 +21,14 @@
     justify-content: center;
   }
   
+::-webkit-scrollbar{
+  width: 12px;
 
+}
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(transparent,aqua);
+  border-radius: 10px;
+}
 </style>
 {% endblock %}
 
@@ -30,10 +37,10 @@
 
 <div id='mainContainerIndex'>
   <div id='subContainerIndex'>
-    <div>
+    <div class="container">
 
       <div class="row">
-        <div class="col-sm-8" style=" padding-left: 250px;">
+        <div class="col-sm-8" style="max-height: 1000px;overflow-y:scroll">
           <div class="pb-2" style="display:flex;justify-content: center; flex-direction: row;">
 
             <div class="my-2">
@@ -222,21 +229,6 @@
         </div>
       </div>
     </div>
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top">
-      <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-        <span class="text-muted">© 2021 Blogger, Inc</span>
-      </div>
-      
-      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
-        
-      </ul>
-    </footer>
   </div>
 </div>
 {%endblock%}

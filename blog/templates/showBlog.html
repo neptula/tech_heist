@@ -4,219 +4,175 @@
 
 <link rel="stylesheet" href="{%static 'css/loader.css'%}">
 <style>
-    body {
-        overflow-x: hidden;
-        background-color: rgb(39, 39, 39);
-        color: rgb(95, 93, 93);
-    }
-
-    #subContainerIndex {
-        align-items: center;
-        position: absolute;
-        font-family: cursive;
-    }
-
-    #mainContainerIndex {
-        display: flex;
-        justify-content: center;
-    }
-    .jumbotron{
-        min-width: 1000px;
+    body{
+        color: black;
     }
 </style>
 {%endblock%}
 {%block content%}
-<div id='mainContainerIndex'>
-    <div id='subContainerIndex'>
-        <div class="jumbotron container" >
+
+<div class="jumbotron">
 
 
 
-            <div class="container" id="titleContainer">
-                <h3><strong>{{blog.title}}</strong></h3>
-                <p>(Total views:{{blog.views}})</p>
-                <div class="fb-like" data-href="http://127.0.0.1:8000/groups/posts/in/quantum-physics/" data-width=""
-                    data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+    <div class="container" id="titleContainer"><h3><strong>{{blog.title}}</strong></h3>
+        <p>(Total views:{{blog.views}})</p>
+        <div class="fb-like" data-href="http://127.0.0.1:8000/groups/posts/in/quantum-physics/" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
 
-            </div>
-            <br />
-            <hr />
-            <div class="text-dark d-flex">
-                <b>Tags of Blog :--</b>
-                {% for tag in tagsArr %}
-                {% if tag %}
-                <form action="/search" method="get" class="form-inline my-2 my-lg-0">
-                    <input class="form-control" type="hidden" placeholder="Search" aria-label="Search" name="query"
-                        id="query" value="{{tag}}" style="width: 80%;">
-                    <button type="submit">{{tag}}</button>
-                </form>
-                {% endif %}
-                {% endfor %}
-            </div>
+    </div>
+    <br />
+    <hr />
+    <div class="text-dark d-flex">
+        <b>Tags of Blog :--</b>
+        {% for tag in tagsArr %}
+        {% if tag %}
+        <form action="/search" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control" type="hidden" placeholder="Search" aria-label="Search" name="query" id="query" value="{{tag}}" style="width: 80%;">
+            <button type="submit">{{tag}}</button>
+        </form> 
+        {% endif %}
+        {% endfor %}
+    </div>
 
-            <div class="container" id="contentContainer"> {{blog.content|safe}}</div>
-            <br />
-            <hr />
-            {% if user.username == blog.author %}
-            <div class="container">
-                <a href="{% url 'blog:editblog' slug=blog.slug %}"> <button
-                        class="btn-sm btn-danger px-3">Edit</button></a>
-            </div>
-            {% endif %}
-
-        </div>
+    <div class="container" id="contentContainer">  {{blog.content|safe}}</div>
+    <br />
+    <hr />
+    {% if user.username == blog.author %}
         <div class="container">
-            <table>
-                <thead>
-                    <th>
-                        <div id="loader">
-                            <div class="line-scale-pulse-out">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </th>
-                    <th>
-                        <div id="loader">
-                            <div class="line-scale-pulse-out">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </th>
-                    <th>
-                        <div id="loader">
-                            <div class="line-scale-pulse-out">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </th>
-                </thead>
-            </table>
-
+            <a href="{% url 'blog:editblog' slug=blog.slug %}"> <button  class="btn-sm btn-danger px-3">Edit</button></a>
         </div>
+    {% endif %}
 
-        <div class="container p-5">
-            <h3>Comments ({{comments.count}})</h3>
-
-            <div class="container bg-light mb-4 p-4 border border-dark" style="border-radius: 20px">
-                {% if user.is_authenticated %}
-
-                <form action="/blog/postComment" method="POST">
-                    {% csrf_token %}
-                    <input class="form-control w-50 my-2" type="text" name="comment" placeholder="Enter Comment Here"
-                        required>
-                    <input type="hidden" name="blogSno" value="{{blog.sno}}" />
-                    <input type="hidden" name="parentSno" value="" />
-                    <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
-                </form>
-                {% else %}
-                <input class="form-control w-50 my-2" disabled="true" type="text" name="comment"
-                    placeholder="Enter Comment Here" />
-                <a><button class="btn btn-simple">Login To Post any Comment</button></a>
-
-                {% endif %}
-            </div>
-            <div class="container px-5">
-                {%for comment in comments %}
-                <div class="row m-2 border border-danger" style="border-radius: 5px">
-                    <div class="col-md-1 bg-light p-2  " style="border-radius: 5px;"><img class="w-100"
-                            src="/static/images/defaultProfile.png" style="border: hidden; border-radius: 100px;"></div>
-
-                    <div class="col-md-11 bg-light" style="border-radius: 5px;">
-                        <b class="badge bg-warning text-dark">{{comment.user.username}}</b>
-
-                        <small style="font-size: small">({{comment.timestamp | naturaltime}})</small>
-
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp; {{comment.comment}}</div>
-                        <div class="reply mx-0">
-                            <!-- Now we will Show replies -->
-                            <div class="replies bg-light my-2">
-                                {% if user.is_authenticated %}
-
-                                <button class="btn-sm btn-simple btn-outline-dark" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.sno}}"
-                                    aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
-                                    Reply
-                                </button>
-                                <div class="collapse" id="replyBox{{comment.sno}}">
-                                    <!-- first we will take replies -->
-                                    <div class="card card-body mt-2 bg-light">
-                                        <form action="/blog/postComment" method="POST">
-                                            {% csrf_token %}
-                                            <input class="form-control w-50 my-2" type="text" name="comment"
-                                                placeholder="Enter Your Reply For Comment Here" required>
-                                            <input type="hidden" name="parentSno" value="{{comment.sno}}" />
-                                            <input type="hidden" name="blogSno" value="{{blog.sno}}" />
-
-                                            <input class="btn btn-simple btn-outline-dark" type="submit"
-                                                value="submit" />
-                                        </form>
-                                    </div>
-                                </div>
-                                {% else %}
-                                <a><button class="btn btn-simple">Login To Post any Reply</button></a>
-                                {% endif %}
-                                {% for reply in replyDict|get_val:comment.sno %}
-                                <div class="row m-2 p-1 border border-secondary" style="border-radius: 5px">
-                                    <div class="col-md-1 d-flex p-3 align-center justify-center "><img class="w-100 "
-                                            src="/static/images/defaultProfile.png"
-                                            style="border: hidden; border-radius: 100px;"></div>
-                                    <div class="col-md-11 bg-light">
-                                        <b class="badge bg-warning text-dark">{{reply.user.username}}</b>
-
-                                        <small style="font-size: small">({{reply.timestamp | naturaltime}})</small>
-
-                                        <div>&nbsp;&nbsp;&nbsp;&nbsp; {{reply.comment}}</div>
-
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-
-
-                        </div>
+</div>
+</div>
+<div class="container">
+    <table>
+        <thead>
+            <th>
+                <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>
-                {% endfor %}
+            </th>
+            <th>
+                <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div id="loader">
+                    <div class="line-scale-pulse-out">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </th>
+        </thead>
+    </table>
+
+</div>
+
+<div class="container p-5">
+    <h3>Comments ({{comments.count}})</h3>
+
+    <div class="container bg-light mb-4 p-4 border border-dark" style="border-radius: 20px">
+        {% if user.is_authenticated %}
+
+        <form action="/blog/postComment" method="POST">
+            {% csrf_token %}
+            <input class="form-control w-50 my-2" type="text" name="comment" placeholder="Enter Comment Here" required>
+            <input type="hidden" name="blogSno" value="{{blog.sno}}" />
+            <input type="hidden" name="parentSno" value="" />
+            <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
+        </form>
+        {% else %}
+        <input class="form-control w-50 my-2" disabled="true" type="text" name="comment"
+            placeholder="Enter Comment Here" />
+        <a><button class="btn btn-simple">Login To Post any Comment</button></a>
+
+        {% endif %}
+    </div>
+    <div class="container px-5">
+        {%for comment in comments %}
+        <div class="row m-2 border border-danger" style="border-radius: 5px">
+            <div class="col-md-1 bg-light p-2  " style="border-radius: 5px;"><img class="w-100"
+                    src="/static/images/defaultProfile.png" style="border: hidden; border-radius: 100px;"></div>
+
+            <div class="col-md-11 bg-light" style="border-radius: 5px;">
+                <b class="badge bg-warning text-dark">{{comment.user.username}}</b>
+
+                <small style="font-size: small">({{comment.timestamp | naturaltime}})</small>
+
+                <div>&nbsp;&nbsp;&nbsp;&nbsp; {{comment.comment}}</div>
+                <div class="reply mx-0">
+                    <!-- Now we will Show replies -->
+                    <div class="replies bg-light my-2">
+                        {% if user.is_authenticated %}
+
+                        <button class="btn-sm btn-simple btn-outline-dark" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                            aria-controls="replyBox{{comment.sno}}">
+                            Reply
+                        </button>
+                        <div class="collapse" id="replyBox{{comment.sno}}">
+                            <!-- first we will take replies -->
+                            <div class="card card-body mt-2 bg-light">
+                                <form action="/blog/postComment" method="POST">
+                                    {% csrf_token %}
+                                    <input class="form-control w-50 my-2" type="text" name="comment"
+                                        placeholder="Enter Your Reply For Comment Here" required>
+                                    <input type="hidden" name="parentSno" value="{{comment.sno}}" />
+                                    <input type="hidden" name="blogSno" value="{{blog.sno}}" />
+
+                                    <input class="btn btn-simple btn-outline-dark" type="submit" value="submit" />
+                                </form>
+                            </div>
+                        </div>
+                        {% else %}
+                        <a><button class="btn btn-simple">Login To Post any Reply</button></a>
+                        {% endif %}
+                        {% for reply in replyDict|get_val:comment.sno %}
+                        <div class="row m-2 p-1 border border-secondary" style="border-radius: 5px">
+                            <div class="col-md-1 d-flex p-3 align-center justify-center "><img class="w-100 "
+                                    src="/static/images/defaultProfile.png"
+                                    style="border: hidden; border-radius: 100px;"></div>
+                            <div class="col-md-11 bg-light">
+                                <b class="badge bg-warning text-dark">{{reply.user.username}}</b>
+
+                                <small style="font-size: small">({{reply.timestamp | naturaltime}})</small>
+
+                                <div>&nbsp;&nbsp;&nbsp;&nbsp; {{reply.comment}}</div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
             </div>
         </div>
-
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a>
-                <span class="text-muted">© 2021 Blogger, Inc</span>
-            </div>
-
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <a class="btn btn-outline-light mx-2 btn-social-icon btn-facebook" href="#"><i
-                        class="fa fa-facebook"></i></a>
-                <a class="btn btn-outline-light mx-2 btn-social-icon btn-linkedin" href="#"><i
-                        class="fa fa-linkedin"></i></a>
-                <a class="btn btn-outline-light mx-2 btn-social-icon btn-twitter" href="http://twitter.com/"><i
-                        class="fa fa-twitter"></i></a>
-
-            </ul>
-        </footer>
+        {% endfor %}
     </div>
-</div>
-{% endblock%}
-
-{% block linkjs %}
 
 
-{% endblock linkjs %}
+    {% endblock%}
+
+    {% block linkjs %}
+
+
+    {% endblock linkjs %}

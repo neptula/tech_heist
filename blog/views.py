@@ -12,7 +12,6 @@ def editblog(request, slug=None):
   initVal = {
     'title': blog.title,
     'content': blog.content,
-    'thumbnail':blog.thumbnail,
   }
   form = writeBlogForm(initial=initVal)
   params={ 'form':form, 'slug':slug }
@@ -20,11 +19,9 @@ def editblog(request, slug=None):
     titlepost = request.POST.get('title')
     contentpost = request.POST.get('content')
     tagspost = request.POST.get('tags')
-    thumbnailpost = request.FILES['thumbnail']
     blog.title = titlepost
     blog.content = contentpost
     blog.tags = tagspost
-    blog.thumbnail = thumbnailpost
     blog.save()
     blog = blogDb.objects.get(title = titlepost)
     return redirect(f"/blog/showblog/{blog.slug}")

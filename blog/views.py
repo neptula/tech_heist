@@ -11,6 +11,7 @@ def editblog(request, slug=None):
   initVal = {
     'title': blog.title,
     'content': blog.content,
+    'thumbnail':blog.thumbnail,
   }
   form = writeBlogForm(initial=initVal)
   params={ 'form':form, 'slug':slug }
@@ -18,9 +19,11 @@ def editblog(request, slug=None):
     titlepost = request.POST.get('title')
     contentpost = request.POST.get('content')
     tagspost = request.POST.get('tags')
+    thumbnailpost = request.FILES['thumbnail']
     blog.title = titlepost
     blog.content = contentpost
     blog.tags = tagspost
+    blog.thumbnail = thumbnailpost
     blog.save()
     blog = blogDb.objects.get(title = titlepost)
     return redirect(f"/blog/showblog/{blog.slug}")
@@ -35,9 +38,10 @@ def writeblog(request):
     author=request.POST.get('author')
     content=request.POST.get('content')
     tags = request.POST.get('tags')
+    getthumbnail = request.FILES['thumbnail']
     tagsArr=tags.split(' ')
     initVal = {'title':title, 'content':content}
-    form = writeBlogForm(initial = initVal)
+    form = writeBlogForm(request.POST, request.FILES, initial = initVal)
     # some checks of form
 
     if blogDb.objects.filter(title=title).exists():
@@ -47,7 +51,7 @@ def writeblog(request):
       return render(request, 'writeBlog.html', context = params)
 
     else:
-      newBlog=blogDb(title=title, author=author, content=content, tags=tags)
+      newBlog=blogDb(title=title, author=author, content=content, tags=tags, thumbnail=getthumbnail)
       newBlog.save()
       blog=blogDb.objects.get(title=title)
       return redirect(f"/blog/showblog/{blog.slug}")

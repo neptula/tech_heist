@@ -13,6 +13,7 @@ class blogDb(models.Model):
     views = models.IntegerField(default=0)
     tags = models.CharField(max_length=255)
     blogpriority = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to="static/images/%y")
     # content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True,blank=True)
     def __str__(self):

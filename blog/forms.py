@@ -5,5 +5,5 @@ from django.forms import ModelForm
 class writeBlogForm(ModelForm):
     class Meta:
         model = blogDb
-        fields = ['title',  'content']
-        labels = {'title':'Enter Title of Your Blog', 'content':'Write Content Of your Blog Here                                                            '}        
+        fields = ['title',  'content', 'thumbnail']
+        labels = {'title':'Enter Title of Your Blog', 'content':'Write Content Of your Blog Here                                                            ', 'thumbnail':'Add thumbnail for your Blog'}        

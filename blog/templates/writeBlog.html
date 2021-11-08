@@ -12,7 +12,7 @@
 
   <div id="mainForm" class="container">
     <h3 style="margin-left: 220px ; color: coral; padding-bottom: 20px;">Write Your Blog Here</h3>
-    <form method="POST" action="/blog/writeblog/" style="max-width:840px" enctype="multipart/form-data">
+    <form method="POST" action="/blog/writeblog/" style="max-width:840px">
       {% csrf_token %}
       {% bootstrap_form form %}
       {{form.media}}

@@ -6,7 +6,6 @@ from blog.models import blogDb, blogComment
 from blog.templatetags import extras
 from blog.forms import writeBlogForm
 
-
 def editblog(request, slug=None):
   blog = blogDb.objects.get(slug = slug)
   initVal = {
@@ -36,10 +35,9 @@ def writeblog(request):
     author=request.POST.get('author')
     content=request.POST.get('content')
     tags = request.POST.get('tags')
-    getthumbnail = request.FILES['thumbnail']
     tagsArr=tags.split(' ')
     initVal = {'title':title, 'content':content}
-    form = writeBlogForm(request.POST, request.FILES, initial = initVal)
+    form = writeBlogForm(initial = initVal)
     # some checks of form
 
     if blogDb.objects.filter(title=title).exists():
@@ -49,7 +47,7 @@ def writeblog(request):
       return render(request, 'writeBlog.html', context = params)
 
     else:
-      newBlog=blogDb(title=title, author=author, content=content, tags=tags, thumbnail=getthumbnail)
+      newBlog=blogDb(title=title, author=author, content=content, tags=tags)
       newBlog.save()
       blog=blogDb.objects.get(title=title)
       return redirect(f"/blog/showblog/{blog.slug}")

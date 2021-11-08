@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
 
+
 }
 
 .mainContainerCSS{
@@ -23,9 +24,11 @@ body {
 
 }
 .box{
+    padding-top: 30px;
+    padding-bottom: 30px;
     position: relative;
     width: 800px;
-    height: 400px;
+    height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;

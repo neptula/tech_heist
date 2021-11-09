@@ -17,7 +17,7 @@
 		</h2>
 
     {% endif %}
-			<h2>Groups</h2>
+			
 
 			<p>Welcome to the Groups Page! Select a Group with a shared interest!</p>
 	</div>
@@ -28,14 +28,14 @@
     </br>
     </br>
 	<a href="{% url 'posts:create' %}" class="btn btn-md btn-fill btn-warning fa fa-paper-plane"><span class="glyphicon glyphicon-plus-sign"></span> Write a POST</a>
-	
+	<hr>
 	{% endif %}
 </div>
 {% endblock %}
 
 {% block group_content %}
 <div class="col-md-8" >
-	<div class="list-group" >
+	<div class="list-group"><h2>Groups >></h2><hr><br>
 		{% for group in object_list %}
 		  <a class="list-group-item" style="background-color: black; color: white;" href="{% url 'groups:single' slug=group.slug %}">
 			     <h3 class="title list-group-item-heading">{{ group.name }}</h3>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			</div>
-		</a>
+		</a><br>
 		{% endfor %}
 	</div>
 </div>

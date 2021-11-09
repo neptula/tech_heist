@@ -94,14 +94,14 @@
               </h3>
               <div class="mb-1 text-muted">{{blog.timestamp}}</div>
               <div class="preview">
-                <p class="card-text mb-auto">{{blog.content|safe|truncatechars:170}}</p>
+                <p class="card-text mb-auto">{{blog.content|safe|truncatechars:180}}</p>
               </div>
               <a href="{% url 'blog:showblog' slug=blog.slug %}">Continue reading</a>
             </div>
             <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
               alt="Thumbnail [200x250]"
               src="{{blog.thumbnail.url}}"
-              data-holder-rendered="true" style="width: 240px; height: 300px;">
+              data-holder-rendered="true" style="width: 240px; height: 300px;border: 2px solid hidden; border-radius: 5px;margin: 1px;">
           </div>
         </div>
         {% else %}

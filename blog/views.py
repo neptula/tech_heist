@@ -19,11 +19,13 @@ def editblog(request, slug=None):
     titlepost = request.POST.get('title')
     contentpost = request.POST.get('content')
     tagspost = request.POST.get('tags')
-    thumbnailpost = request.FILES['thumbnail']
+    # Handling Change of thumbnail
+    if 'thumbnail' in request.FILES:
+      thumbnailpost = request.FILES['thumbnail']
+      blog.thumbnail = thumbnailpost
     blog.title = titlepost
     blog.content = contentpost
     blog.tags = tagspost
-    blog.thumbnail = thumbnailpost
     blog.save()
     blog = blogDb.objects.get(title = titlepost)
     return redirect(f"/blog/showblog/{blog.slug}")

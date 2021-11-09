@@ -53,9 +53,8 @@
         {% if user.is_authenticated %}
         <div class="navbar-nav ml-auto">
           <a href="{% url 'blogs' %}" class="nav-item nav-link active"><i class="fa fa-home"> </i><span>Blogs</span></a>
-          <a href="{%url 'posts:create' %}" class="nav-item nav-link"><i class="fa fa-paper-plane">
-            </i><span>Post</span></a>
-          <a href="{%url 'groups:all' %}" class="nav-item nav-link"><i class="fa fa-users"></i><span>Groups</span></a>
+          
+          <a href="{%url 'groups:all' %}" class="nav-item nav-link"><i class="fa fa-users"></i><span>Room</span></a>
           <a href="{% url 'accounts:contactus'  %}" class="nav-item nav-link"><i
               class="fa fa-exclamation-triangle"></i><span>Contact Us</span></a>
               <a href="{% url 'accounts:show_profile' %}" class="nav-item nav-link"><i

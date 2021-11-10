@@ -1,45 +1,13 @@
 {%extends "base.html" %}
 {%load bootstrap4%}
-{%block linkcss%}
 
-<style>
-  body {
-    overflow-x: hidden;
-    background-color: rgb(77, 70, 9);
-    color: white;
-  }
-  #contactUsForm {
-    align-items: center;
-    position: absolute;
-    font-family: cursive;
-    max-width: 700px;
-    border: 2px solid rgb(224 211 211);
-    border-radius: 20px
-  }
-
-  #contactUsContainer {
-    display: flex;
-    justify-content: center;
-
-  }
-</style>
-{%endblock%}
 {%block content%}
-<div id="contactUsContainer">
-
-    <div id="contactUsForm" class="container my-3 p-5" style="max-width: 800px;">
-      <h3 class="text-center">Edit Your Profile Here</h3>
+<div class="container">
     
-    <form method="POST" style="max-width:840px" enctype="multipart/form-data">
-        <label for="username">username</label>
-        <input id="username" class="form-control"  type="text" disabled value="{{username}}" >
-        <small>     You can't edit username</small>
+    <form method="POST">
     {%csrf_token%}
-    {% bootstrap_form form %}
-    {% bootstrap_form form2 %}
-    
+    {{ form.as_p }}
     <button type="submit" class="btn btn-success">Update Profile</button>
 </form>
-</div>
 </div>
 {%endblock%}

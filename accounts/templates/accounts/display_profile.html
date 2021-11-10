@@ -3,30 +3,11 @@
 {% block linkcss%}
 {% load static%}
 <link rel="stylesheet" href="{% static 'css/master.css' %} ">
-<style>
-    body {
-      overflow-x: hidden;
-      background-color: rgb(77, 70, 9);
-      color: white;
-    }
-    #contactUsForm {
-      align-items: center;
-      position: absolute;
-      font-family: cursive;
-    }
-  
-    #contactUsContainer {
-      display: flex;
-      justify-content: center;
-  
-    }
-  </style>
+
 {%endblock%} 
 {%block content%}
-<div id="contactUsContainer">
 
-    <div id="contactUsForm" class="container">
-
+<div class="container">
 	<h5><img src="https://img.icons8.com/offices/2x/menu.png" width="20px" height="20px" alt="">  DASHBOARD</h5>
 
             <div class="card hovercard">
@@ -34,14 +15,11 @@
 
                 </div>
                 <div class="avatar">
-                    {% if usertags.profile_image %}
-                    <img src="{{ usertags.profile_image.url }}" alt="" srcset="">
-                    {% else %}
                     <img alt="" src="/static/images/defaultProfile.png">
-                    {% endif %}
                 </div>
                 <div class="info">
                     <h1><strong>Welcome</strong>  {{user.username}}</h1>
+    <!--<img class="profile-image"src="{{request.user.profile.image.url}}" alt="">-->
     <h3>User Details:</h3>
        <p>First Name:  {{user.first_name}}</br></br>
         Last Name:  {{user.last_name}}</br></br>
@@ -71,7 +49,7 @@
                 </div>
             </div>
 
-
+</div>
 
 
 
@@ -81,6 +59,5 @@
 
     <a href="{% url 'accounts:logout'%}"> <button  class="">Logout</button></a>
     </br></br>
-    </div>
-    </div>
+    
 {%endblock%}

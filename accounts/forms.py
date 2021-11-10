@@ -2,19 +2,24 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import models
 from django.contrib.auth.models import User
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.db.models.base import Model
+from accounts.models import userTags
 
-class editprofileform(UserChangeForm):
-    email=forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    first_name=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
-    username=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
-    #date_joined=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
-    #is_superuser=forms.CharField(max_length=100,widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    #is_staff=forms.CharField(max_length=100,widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    is_active=forms.CharField(max_length=100,widget=forms.CheckboxInput(attrs={'class':'form-check'}))
-    last_login=forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+class editprofileform(ModelForm):
     class Meta:
-        model=get_user_model()
-        fields=("username","first_name","last_name", "email","is_active")
+        model=User
+        fields=("first_name","last_name", "email")
+        labels={
+                'first_name':'First name',
+                'last_name':'last name',
+                'email':'email',
+        }
+class extraFieldsProfileEditform(ModelForm):
+    class Meta:
+        model = userTags
+        fields=('status','profile_image')
+        labels={'status':'status',
+        'profile_image':'Profile Image',
+        }

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 # Create your views here.
 from . import forms
-from .forms import editprofileform
+from .forms import editprofileform,extraFieldsProfileEditform
 from accounts.models import contact
 from accounts.models import userTags
 from django.contrib import messages
@@ -73,14 +73,57 @@ class passwordchangedview(PasswordChangeView):
   form_class=PasswordChangeForm  
   success_url=reverse_lazy('login')
 
-class UserEditView(UpdateView):
-  form_class=editprofileform
-  success_url=reverse_lazy('index')
-  template_name='accounts/profile_user.html'
+# class UserEditView(UpdateView):
+#   form_class=editprofileform
+#   success_url=reverse_lazy('index')
+#   template_name='accounts/profile_user.html'
 
-  def get_object(self):
-      return self.request.user
+#   def get_object(self):
+#       return self.request.user
 
-class displayprofile(TemplateView):
+# class displayprofile(TemplateView):
   
-  template_name='accounts/display_profile.html'
+#   template_name='accounts/display_profile.html'
+def UserEditView(request):
+  initval1={
+    'first_name':request.user.first_name,
+    'last_name':request.user.last_name,
+    'email':request.user.email,
+  }
+  form=editprofileform(initial=initval1)
+  usertags=userTags.objects.get(username=request.user.username)
+  initval2={
+    'status':usertags.status,
+    'profile_image':usertags.profile_image,
+  }
+  form2=extraFieldsProfileEditform(initial=initval2)
+  username=request.user
+  if request.method=='POST':
+    first_name=request.POST.get('first_name')
+    last_name=request.POST.get('last_name')
+    email=request.POST.get('email')
+    status=request.POST.get('status')
+    if request.FILES:
+      image=request.FILES['profile_image']
+      usertags=userTags.objects.get(username=username)
+      usertags.profile_image=image
+      usertags.save()
+    # print(first_name, last_name, email, status)
+    user=User.objects.get(username=username)
+    user.first_name=first_name
+    user.last_name=last_name
+    user.email=email
+    user.save()
+
+    usertags=userTags.objects.get(username=username)
+    usertags.status=status
+    usertags.save()
+
+  dictn={'form':form, 'username':username, 'form2':form2}
+  return render(request, 'accounts/profile_user.html', context=dictn)
+
+def displayprofile(request):
+  username=request.user
+  usertags=userTags.objects.get(username=username)
+  context={'usertags':usertags}
+  return render(request, 'accounts/display_profile.html', context)

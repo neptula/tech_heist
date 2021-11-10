@@ -12,8 +12,8 @@ urlpatterns = [
     path('contactus/', views.contactus,name='contactus'),
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="accounts/password_reset.html"),
      name="reset_password"),
-    path('edit_profile/', UserEditView.as_view(), name="edit_profile"),
-    path('show_profile/', displayprofile.as_view(), name="show_profile"),
+    path('edit_profile/', views.UserEditView, name="edit_profile"),
+    path('show_profile/', views.displayprofile, name="show_profile"),
 
    # path('password/',auth_views.PasswordChangeView.as_view(template_name='accounts/password_change.html')),
     path('password/',passwordchangedview.as_view(template_name='accounts/password_change.html')),

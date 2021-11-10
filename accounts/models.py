@@ -18,6 +18,8 @@ class contact(models.Model):
 class userTags(models.Model):
     username = models.CharField(max_length=255)
     interestingTags = models.CharField(max_length=255)
+    status=models.TextField(max_length=255, null=True, blank=True)
+    profile_image=models.ImageField(upload_to="static/images/%y")
 
     def __str__(self):
         return 'Interests of ' + self.username

@@ -45,7 +45,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                        <img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" width="40px" height="40px">{{ blog.likes.all.count }}
+                        <img src="/static/images/likeicon.png" width="40px" height="40px">{{ blog.likes.all.count }}
                     </button>
                 </form>
             
@@ -53,7 +53,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                    <img src="https://image.similarpng.com/very-thumbnail/2020/08/Facebook-dislike-icon-premium-vector-PNG.png" width="30px" height="30px" alt="">	{{ blog.dislikes.all.count }}
+                    <img src="/static/images/dislikeicon.png" width="30px" height="30px" alt="">	{{ blog.dislikes.all.count }}
                     </button>
                 </form>
             </div>

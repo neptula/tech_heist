@@ -16,6 +16,8 @@ class blogDb(models.Model):
     thumbnail = models.ImageField(upload_to="static/images/%y")
     # content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True,blank=True)
+    likes=models.ManyToManyField(User,related_name='blikes',blank=True)
+    dislikes=models.ManyToManyField(User,related_name='bdislikes',blank=True)
     def __str__(self):
         return 'Blog written by ' + self.author
     

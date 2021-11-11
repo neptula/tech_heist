@@ -16,7 +16,7 @@ urlpatterns = [
     path('show_profile/', views.displayprofile, name="show_profile"),
 
    # path('password/',auth_views.PasswordChangeView.as_view(template_name='accounts/password_change.html')),
-    path('password/',passwordchangedview.as_view(template_name='accounts/password_change.html')),
+    path('password/',passwordchangedview.as_view(template_name='accounts/password_change.html'), name="password"),
 
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="accounts/password_reset_sent.html"), 
         name="password_reset_done"),

@@ -37,8 +37,8 @@
     {%csrf_token%}
     {% bootstrap_form form %}
     {% bootstrap_form form2 %}
-    
-    <button type="submit" class="btn btn-success">Update Profile</button>
+    <a class="btn btn-sm btn-danger" href="{% url 'accounts:password' %}">change password</a>
+    <button type="submit" class="btn  btn-sm btn-success">Update Profile</button>
 </form>
 </div>
 </div>

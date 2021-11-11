@@ -35,17 +35,13 @@
             <div class="container" id="titleContainer">
                 <h3><strong>{{blog.title}}</strong></h3>
                 <p>(Total views:{{blog.views}})</p>
-                <div class="fb-like" data-href="http://127.0.0.1:8000/groups/posts/in/quantum-physics/" data-width=""
-                    data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
-
             </div>
-            <br />
             <div class="form-inline my-2 my-lg-0">
                 <form method="POST" action="{% url 'blog:like' blog.slug %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                        <img src="/static/images/likeicon.png" width="50px" height="50px">{{ blog.likes.all.count }}
+                        <img src="/static/images/likeicon.png" width="40px" height="40px">{{ blog.likes.all.count }}
                     </button>
                 </form>
             
@@ -53,7 +49,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-                    <img src="/static/images/dislikeicon.png" width="40px" height="40px" alt="">	{{ blog.dislikes.all.count }}
+                    <img src="/static/images/dislikeicon.png" width="40px" height="40px" style="border: 2px solid hidden; border-radius: 100px; padding: 5px;">	{{ blog.dislikes.all.count }}
                     </button>
                 </form>
             </div>
@@ -71,7 +67,14 @@
                 {% endfor %}
             </div>
 
-            <div class="container" id="contentContainer"> {{blog.content|safe}}</div>
+            <div class="" id="contentContainer">
+                <h5 class="text-dark">
+                    <b>Content Of Blog:--</b>
+                </h5> 
+                <div class="container">
+                    {{blog.content|safe}}
+                </div>
+            </div>
             <br />
             <hr />
             {% if user.username == blog.author %}

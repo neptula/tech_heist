@@ -24,13 +24,70 @@
 
   {% block linkcss%}{% endblock %}
   <style>
+  * {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.all:root {
+	--color-text: #111;
+	--color-bg: #fff;
+}
+
+.dark:root {
+	--color-text: #e5e5e5;
+	--color-bg: #121212;
+}
+
+body {
+	background: var(--color-bg);
+}
     ::-webkit-scrollbar{
   width: 12px;
 
     }
 ::-webkit-scrollbar-thumb{
-  background: aqua;
-  border-radius: 10px;
+  background: rgb(161, 172, 16);
+  border-radius: 11px;
+}
+.context {
+	position: absolute;
+	top: 10px;
+	right: 40px;
+}
+
+.context input {
+	width: 90px;
+	height: 40px;
+	background: #111;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.context input:checked {
+	background: #fff;
+}
+
+.context input::after {
+	content: "";
+	position: absolute;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	background: #ffbe76;
+	transform: translate(5px, 5px);
+	transition: 0.3s linear;
+}
+
+.context input:checked::after {
+	inset: unset;
+	background: transparent;
+	box-shadow: 10px 10px 0 #353b48;
+	transform: translate(calc(90px - 45px), -5px);
 }
 
   </style>
@@ -59,7 +116,9 @@
               class="fa fa-exclamation-triangle"></i><span>Contact Us</span></a>
               <a href="{% url 'accounts:show_profile' %}" class="nav-item nav-link"><i
                 class="fa fa-exclamation-triangle"></i><span>Profile</span></a>
-            
+            <div class="context">
+		<input type="checkbox" id="toggle">
+	</div>
         </div>
 
        
@@ -71,7 +130,9 @@
         </li>
         <a href="{% url 'accounts:contactus'  %}" class="nav-item nav-link"><i
             class="fa fa-exclamation-triangle"></i><span>Contact Us</span></a>
-
+          <div class="context">
+		<input type="checkbox" id="toggle">
+	</div>
         {% endif %}
       </ul>
     </div>
@@ -109,6 +170,17 @@
   $("#myModal").on("shown.bs.modal", function () {
     $("#myInput").trigger("focus");
   });
+   const btnDarkMode = document.querySelector("#toggle");
+const body = document.querySelector("html");
+btnDarkMode.addEventListener("click", (e) => {
+	if (btnDarkMode.checked) {
+		body.classList.remove("all");
+		body.classList.add("dark");
+	} else {
+		body.classList.add("all");
+		body.classList.remove("dark");
+	}
+});
 </script>
 {% block linkjs%}{% endblock %}
 

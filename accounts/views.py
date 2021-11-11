@@ -71,7 +71,8 @@ def contactus(request):
 
 class passwordchangedview(PasswordChangeView):
   form_class=PasswordChangeForm  
-  success_url=reverse_lazy('login')
+  success_url=reverse_lazy('accounts:show_profile')
+
 
 # class UserEditView(UpdateView):
 #   form_class=editprofileform

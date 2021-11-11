@@ -5,16 +5,16 @@
 {%endblock%} 
 
 <div class="post media">
-	<h3 style="color:white;font-size: 15px; text-align:left;">{{ post.message_html|safe }}</h3>
+	<h2 style="color:rgb(228, 72, 72);font-size: 23px; text-align:left;">{{ post.message_html|safe }}</h2>
 	<div class="media-body">
-		<strong>&nbsp;&nbsp;&nbsp;&nbsp;author: {{ post.user.username }}</strong>
-		<h5 class="media-heading" style="color:black;font-size: 12px;">
-			<span class="username">&nbsp;&nbsp;&nbsp;&nbsp;blog handle:<a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
+		<strong>&nbsp;&nbsp;&nbsp;&nbsp; --> author: {{ post.user.username }}</strong>
+		<h4 class="media-heading" style="color:rgb(180, 143, 143);font-size: 19px;">
+			<span class="username">&nbsp;&nbsp;&nbsp;&nbsp;->blog handle:<a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
 			<time class="time">&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
 			{% if post.group %}
 			<span class="group-name">&nbsp;&nbsp;&nbsp;&nbsp;posted in <a href="#">{{ post.group.name }}</a></span>
 			{% endif %}
-		</h5>
+		</h4>
 
 
 
@@ -27,20 +27,20 @@
 				</a>
 			{% endif %}
 		</div>
-		<div class="d-flex flex-row hg">
+		<div class="form-inline my-2 my-lg-0" >
 			<form method="POST" action="{% url 'posts:like' post.pk %}">
 				{% csrf_token %}
 				<input type="hidden" name="next" value="{{ request.path }}">
-				<button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-					<img src="https://i.pinimg.com/originals/39/44/6c/39446caa52f53369b92bc97253d2b2f1.png" width="40px" height="40px">{{ post.likes.all.count }}
+				<button style="background-color: transparent;color: rgb(197, 158, 158); border: none; box-shadow: none;" type="submit">
+					<img src="/static/images/likeicon.png" width="50px" height="50px">{{ post.likes.all.count }}
 				</button>
 			</form>
 		
 			<form method="POST" action="{% url 'posts:dislike' post.pk %}">
 				{% csrf_token %}
 				<input type="hidden" name="next" value="{{ request.path }}">
-				<button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
-				<img src="https://image.similarpng.com/very-thumbnail/2020/08/Facebook-dislike-icon-premium-vector-PNG.png" width="30px" height="30px" alt="">	{{ post.dislikes.all.count }}
+				<button style="background-color: transparent;color: rgb(197, 158, 158); border: none; box-shadow: none;" type="submit">
+				<img src="/static/images/dislikeicon.png" width="40px" height="40px" alt="">	{{ post.dislikes.all.count }}
 				</button>
 			</form>
 		  </div>

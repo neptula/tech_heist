@@ -11,40 +11,59 @@
 {% block linkcss%}
 
 <style>
-  body{
+   body{
     overflow-x: hidden;
-    background-color: rgb(39, 39, 39);
+    background-color: #eef0f2;
     color: rgb(95, 93, 93);
   } 
-  #subContainerIndex {
-    align-items: center;
-    position: absolute;
-    font-family: cursive;
-  }
+  .page-header {
+   position: relative;
+   padding-top: 8rem;
+   padding-bottom: 8rem;
+   background-position: 100%;
+   background-size: cover;
+   background-repeat: no-repeat;
 
-  #mainContainerIndex {
-    display: flex;
-    justify-content: center;
-  }
+   &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba($black, .6);
+   }
+   img{
+  grid-area:img;
+  width:100%;
+  margin:1rem;
+  border-radius:10px;
+}
+}
+
+     h3,h2 {
+	color: var(--color-text);
+}
+
+
   </style>
 <link rel="stylesheet" href="{%static 'css/button.css'%}">
 {% endblock %}
 
 {%block content%}
-<div id='mainContainerIndex'>
-  <div id='subContainerIndex'>
-  <div class="kl text-center" style="padding-top: 200px; padding-bottom: 200px;">
-    <h1><strong>Welcome to Blogger</strong> </h1>
-   <div class="write" >
-    
-    <h2>Always had a thought to start a Blog?</h2>
-    <h3>We are here to help u follow your passion.</h3>
-    <h3>Get Started now to create your own Blog!!</h3>
-    </div>
-  </div>
+<div class="page">
+ <header class="page-header"
+           style="background-image:url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80')">
+      <div class="container position-relative px-5 text-center text-white">
+         <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8">
+               <h1 class="page-header-ui-title mb-3" style="color:black">Welcome to Blogger</h1>
+               <h4 class="page-header-ui-text mb-0" style="color:black">Excited to start ur blog?</h4>
+            </div>
+         </div>
+      </div>
 
-
-<div style="padding-bottom: 70px;">
+<div style="padding-bottom: 110px; padding-top: 170px;">
 
   {% if user.is_authenticated %}
   <a href="blog/writeblog/">

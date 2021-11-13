@@ -20,15 +20,54 @@
       justify-content: center;
   
     }
+    .dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 6px;
+  font-size: 6px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
   </style>
 {%endblock%} 
 {%block content%}
 <div id="contactUsContainer">
 
     <div id="contactUsForm" class="container">
-        
-	<h5><a href="{% url 'posts:for_user' username=user.username %}"><img src="https://img.icons8.com/offices/2x/menu.png" width="20px" height="20px" alt=""></a>  DASHBOARD </h5>
-
+        <div class="dropdown">
+            <button class="dropbtn"><img src="https://img.icons8.com/offices/2x/menu.png" width="20px" height="20px" alt=""></button>
+            <div class="dropdown-content">
+                <a class="dropdown-item" href="{% url 'posts:for_user' username=user.username %}">POSTS</a>
+                <a class="dropdown-item" href="{% url 'blogs' %}">BLOGS</a>
+                <a class="dropdown-item" href="{%url 'groups:all' %}">GROUPS</a>
+            </div>
+          </div>
             <div class="card hovercard">
                 <div class="cardheader">
 

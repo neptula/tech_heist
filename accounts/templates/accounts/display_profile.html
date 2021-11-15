@@ -61,10 +61,20 @@
 
     <div id="contactUsForm" class="container">
         <div class="dropdown">
-            <button class="dropbtn"><img src="https://img.icons8.com/offices/2x/menu.png" width="20px" height="20px" alt=""></button>
-            <div class="dropdown-content">
-                <a class="dropdown-item" href="{% url 'posts:for_user' username=user.username %}">POSTS</a>
-                <a class="dropdown-item" href="{% url 'blogs' %}">BLOGS</a>
+          <a type="button" class="dropbtn" style="font-size: 1rem; display: flex; align-items: center; justify-content: center;" ><img src="https://img.icons8.com/offices/2x/menu.png" width="20px" height="20px" alt="">Dashboard</a>
+          <div class="dropdown-content">
+              <a class="dropdown-item" href="{% url 'posts:for_user' username=user.username %}">POSTS</a>
+              <!-- <a class="dropdown-item" href="{% url 'blogs' %}">BLOGS</a> -->
+              <div class="dropend text-dark" style="cursor: pointer;">
+                <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  BLOGS
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" type="button"href="{% url 'blogs' %}">All Blogs</a></li>
+                  <li><a class="dropdown-item" type="button"href="{% url 'accounts:filterByUsername' %}">Blogs Written By you</a></li>
+                </ul>
+              </div>
+             
                 <a class="dropdown-item" href="{%url 'groups:all' %}">GROUPS</a>
             </div>
           </div>
@@ -85,7 +95,8 @@
     <h3>User Details:</h3>
        <p>First Name:  {{user.first_name}}</br></br>
         Last Name:  {{user.last_name}}</br></br>
-        Email:                {{user.email}}
+        Email:                {{user.email}}</br></br>
+        Interesting tags:  {{usertags.interestingTags}}
        </p> 
     
                 </div>
@@ -110,12 +121,6 @@
                     </a>
                 </div>
             </div>
-
-
-
-
-
-
     
     <a href="{% url 'accounts:edit_profile'%}"> <button  class="btn-sm btn-light">Edit Profile</button></a>
 

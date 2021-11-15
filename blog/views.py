@@ -7,6 +7,7 @@ from django.views import View
 from blog.models import blogDb, blogComment
 from blog.templatetags import extras
 from blog.forms import writeBlogForm
+from accounts.models import userTags
 
 def editblog(request, slug=None):
   blog = blogDb.objects.get(slug = slug)
@@ -97,16 +98,23 @@ def postComment(request):
   if request.method =='POST':
     comment = request.POST.get('comment')
     user = request.user
+    uname = user.username
     blogSno = request.POST.get('blogSno')
     blog = blogDb.objects.get(sno=blogSno)
+    # usertags = userTags.objects.get(username=user.username)
+    # if usertags.profile_image:
+    #   userImageUrl = usertags.profile_image.url
+    # else :
+    #   userImageUrl = "/static/images/defaultProfile.png"
+    usertags = userTags.objects.get(username=uname) 
     parentSno = request.POST.get('parentSno')
     if parentSno=="":
-      comment = blogComment(comment=comment, user=user, blog=blog)
+      comment = blogComment(comment=comment, user=user, blog=blog,usertags=usertags)
       comment.save()
       messages.success(request, ' Your Comment posted Successfully')
     else:
       parent = blogComment.objects.get(sno=parentSno)
-      comment = blogComment(comment=comment, user=user, blog=blog, parent=parent)
+      comment = blogComment(comment=comment, user=user, blog=blog, parent=parent,usertags=usertags)
 
       comment.save()
       messages.success(request, ' Your Reply To Comment Posted Succeefully')

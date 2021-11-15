@@ -36,10 +36,12 @@ def blogs(request):
     myuserinterests=myuser.interestingTags
     userinterestsArr=myuserinterests.split(' ')
     for blog in allBlogs:
+        blog.blogpriority = 0
+        blog.save()
+    for blog in allBlogs:
         blogtags=blog.tags
         blogtagsArr=blogtags.split(' ')
         # print(blogtagsArr)
-        blog.blogpriority = 0
         for interest in userinterestsArr:
             if interest:    
                 for tag in blogtagsArr:

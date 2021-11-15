@@ -11,6 +11,7 @@ from accounts.models import userTags
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User 
+from blog.models import blogDb
 
 # class SignUp(CreateView):
 #   form_class=forms.SignUpForm
@@ -93,6 +94,7 @@ def UserEditView(request):
   }
   form=editprofileform(initial=initval1)
   usertags=userTags.objects.get(username=request.user.username)
+  interests=usertags.interestingTags
   initval2={
     'status':usertags.status,
     'profile_image':usertags.profile_image,
@@ -103,6 +105,7 @@ def UserEditView(request):
     first_name=request.POST.get('first_name')
     last_name=request.POST.get('last_name')
     email=request.POST.get('email')
+    interestingTags=request.POST['tags']
     status=request.POST.get('status')
     if request.FILES:
       image=request.FILES['profile_image']
@@ -118,10 +121,11 @@ def UserEditView(request):
 
     usertags=userTags.objects.get(username=username)
     usertags.status=status
+    usertags.interestingTags=interestingTags
     usertags.save()
     messages.success(request, 'Profile Updated Successfully')
     return redirect('accounts:show_profile')
-  dictn={'form':form, 'username':username, 'form2':form2}
+  dictn={'form':form, 'username':username, 'form2':form2, 'interests':interests}
   return render(request, 'accounts/profile_user.html', context=dictn)
 
 def displayprofile(request):
@@ -129,3 +133,12 @@ def displayprofile(request):
   usertags=userTags.objects.get(username=username)
   context={'usertags':usertags}
   return render(request, 'accounts/display_profile.html', context)
+
+
+def filterByUsername(request):
+  query = request.user.username
+  allBlogs = blogDb.objects.filter(author=query)
+  if allBlogs.count()== 0:
+    messages.warning(request, " You haven't written any blog yet !!!")
+  params = {'allBlogs':allBlogs}
+  return render(request,'accounts/filterByUsername.html', params)

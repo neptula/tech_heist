@@ -8,11 +8,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="mainFormContainer">
+<div id="mainFormContainer" >
 
   <div id="mainForm" class="container">
     <h3 style="margin-left: 220px ; color: coral; padding-bottom: 20px;">Write Your Blog Here</h3>
-    <form method="POST" action="/blog/writeblog/" style="max-width:840px" enctype="multipart/form-data">
+    <form method="POST" action="/blog/writeblog/" style="max-width:840px;padding-bottom: 20px;" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
       {{form.media}}
@@ -41,21 +41,7 @@
       <button type="submit" class="btn-sm btn-light">Submit</button>
       
     </form>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top">
-      <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-        <span class="text-muted">© 2021 Blogger, Inc</span>
-      </div>
-      
-      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-        <a class="btn btn-outline-light mx-2 btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
-        
-      </ul>
-    </footer>
+    
   </div>
 </div>
 

@@ -8,6 +8,7 @@
     background-color: rgb(77, 70, 9);
     color: white;
   }
+
   #contactUsForm {
     align-items: center;
     position: absolute;
@@ -22,24 +23,59 @@
     justify-content: center;
 
   }
+
+  .bootstrap-select>.dropdown-toggle {
+    width: 200%;
+  }
+
+  .show {
+    width: 600px
+  }
 </style>
 {%endblock%}
 {%block content%}
 <div id="contactUsContainer">
 
-    <div id="contactUsForm" class="container my-3 p-5" style="max-width: 800px;">
-      <h3 class="text-center">Edit Your Profile Here</h3>
-    
+  <div id="contactUsForm" class="container my-3 p-5" style="max-width: 800px;">
+    <h3 class="text-center">Edit Your Profile Here</h3>
+
     <form method="POST" style="max-width:840px" enctype="multipart/form-data">
-        <label for="username">username</label>
-        <input id="username" class="form-control"  type="text" disabled value="{{username}}" >
-        <small>     You can't edit username</small>
-    {%csrf_token%}
-    {% bootstrap_form form %}
-    {% bootstrap_form form2 %}
-    <a class="btn btn-sm btn-danger" href="{% url 'accounts:password' %}">change password</a>
-    <button type="submit" class="btn  btn-sm btn-success">Update Profile</button>
-</form>
-</div>
+      <label for="username">username</label>
+      <input id="username" class="form-control" type="text" disabled value="{{username}}">
+      <small>     You can't edit username</small>
+      {%csrf_token%}
+      {% bootstrap_form form %}
+      {% bootstrap_form form2 %}
+      <!-- container of change interesting tags -->
+      <p>Interests :- <br>Currently:- {{interests}}<br>
+      Change Your Interests</p>
+      <select multiple data-style="bg-white px-4 py-3 mb-3 shadow-sm " id="selectpickerid" class="selectpicker w-50">
+        <option>#JavaScript </option>
+        <option>#Python flask </option>
+        <option>#Python </option>
+        <option>#C++ </option>
+        <option>#Java </option>
+        <option>#HTML </option>
+        <option>#Bootstrap </option>
+        <option>#Django </option>
+        <option>#PHP </option>
+      </select>
+      <small>
+        <ul>
+          <li>Select maximum 3 tags</li>
+        </ul>
+      </small>
+      <input id="hiddenSelected" type="hidden" name="tags">
+
+      <!-- end of container  -->
+      <a class="btn btn-sm btn-danger" href="{% url 'accounts:password' %}">change password</a>
+      <button type="submit" class="btn  btn-sm btn-success">Update Profile</button>
+    </form>
+  </div>
 </div>
 {%endblock%}
+
+{% block linkjs %}
+{% load static %} 
+<script src="{% static 'js/signup.js' %}"></script>
+{% endblock %}

@@ -1,18 +1,13 @@
-{% block linkcss%}
-
-{% load static%}
-<link rel="stylesheet" href="{%static 'css/_post.css'%}">
-{%endblock%} 
-
-<div class="post media">
+<div class="card" style="background-color: antiquewhite;">
+<div class="jumbotron" style="background-color: rgb(39, 39, 39);">
 	<h2 style="color:rgb(228, 72, 72);font-size: 23px; text-align:left;">{{ post.message_html|safe }}</h2>
 	<div class="media-body">
-		<strong>&nbsp;&nbsp;&nbsp;&nbsp; --> author: {{ post.user.username }}</strong>
+		<strong>--> author: {{ post.user.username }}</strong>
 		<h4 class="media-heading" style="color:rgb(180, 143, 143);font-size: 19px;">
-			<span class="username">&nbsp;&nbsp;&nbsp;&nbsp;->blog handle:<a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
-			<time class="time">&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+			<span class="username">->blog handle:<a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
+			<time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
 			{% if post.group %}
-			<span class="group-name">&nbsp;&nbsp;&nbsp;&nbsp;posted in <a href="#">{{ post.group.name }}</a></span>
+			<span class="group-name">posted in <a href="#">{{ post.group.name }}</a></span>
 			{% endif %}
 		</h4>
 
@@ -45,3 +40,4 @@
 			</form>
 		  </div>
 	</div>
+</div>
